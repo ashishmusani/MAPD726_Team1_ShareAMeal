@@ -1,0 +1,7 @@
+{
+  "name": "ShareAMeal",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
