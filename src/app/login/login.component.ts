@@ -20,13 +20,10 @@ export class LoginComponent implements OnInit {
 
 
   login(){
-    console.log(this.password)
     this.fireService.loginWithEmail({email: this.email, password: this.password}).then(res => {
-      console.log(res)
       if(res.user.uid){
         this.fireService.getDetails({uid: res.user.uid}).subscribe(res => {
-          console.log('Welcome')
-          console.log(res);
+          this.router.navigate(['/cook/kitchen'])
         })
       }
     }, err => {
