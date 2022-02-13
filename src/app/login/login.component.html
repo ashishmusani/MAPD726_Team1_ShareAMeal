@@ -1,0 +1,25 @@
+<ion-content class="ion-justify-content-center" [fullscreen]="true">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center"  style="margin-top: 20vh;">
+      <ion-icon name="pizza-outline" size="large"></ion-icon>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-padding-vertical" style="margin-top: 15vh;">
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input [(ngModel)]="email"></ion-input>
+      </ion-item>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-padding-vertical">
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input [(ngModel)]="password" type="password"></ion-input>
+      </ion-item>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-padding-vertical">
+      <ion-button expand="block" size="large" color="medium" (click)="login()">Login</ion-button>
+    </ion-row>
+    <ion-row class="ion-justify-content-center" style="margin-top: 10vh;">
+      <ion-button expand="block" size="large" color="medium">Sign Up</ion-button>
+    </ion-row>
+  </ion-grid>
+</ion-content>

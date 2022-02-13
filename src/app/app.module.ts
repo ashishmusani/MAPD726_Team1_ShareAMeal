@@ -7,16 +7,25 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { FormsModule } from '@angular/forms';
+
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../environments/environment'
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [
+    AppComponent,
+    LoginComponent
+  ],
+  entryComponents: [
+    LoginComponent
+  ],
   imports: [BrowserModule, 
             IonicModule.forRoot(), 
             AppRoutingModule,
             AngularFireModule.initializeApp(environment.firebaseConfig, 'ShareAMeal'),
+            FormsModule
           ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
