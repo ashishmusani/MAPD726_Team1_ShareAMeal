@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent},
   {
     path: 'cook',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+    loadChildren: () => import('./cookTabs/tabs.module').then(m => m.TabsPageModule)
   },
   { path: '', redirectTo: 'login', pathMatch: 'full' }
 ];
