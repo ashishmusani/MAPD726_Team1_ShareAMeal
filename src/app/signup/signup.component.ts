@@ -23,6 +23,20 @@ export class SignupComponent implements OnInit {
   }
 
   signup(){
-      console.log("Signup called")
+    this.fireService.signup({email: this.email, password: this.password}).then(res => {
+      if(res.user.uid){
+        let data = {
+          email: this.email,
+          password: this.password,
+          uid: res.user.uid
+        }
+        this.fireService.saveDetails(data).then(res => {
+          this.router.navigate
+        }, err => {
+          alert(err);
+        })
+      }
+    })
   }
+
 }
