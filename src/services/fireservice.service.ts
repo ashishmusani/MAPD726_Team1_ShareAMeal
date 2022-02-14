@@ -27,4 +27,8 @@ export class FireserviceService {
     return this.firestore.collection("users").doc(data.uid).valueChanges();
   }
 
+  addItem(data){
+    return this.firestore.collection("items").doc().set(data)
+  }
+
 }
