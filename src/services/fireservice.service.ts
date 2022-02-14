@@ -27,4 +27,12 @@ export class FireserviceService {
     return this.firestore.collection("users").doc(data.uid).get();
   }
 
+  addNewKitchen(data) {
+    return this.firestore.collection("kitchens").doc().set(data)
+  }
+  
+  getKitchens(){
+    return this.firestore.collection("kitchens").doc().get();
+  }
+
 }

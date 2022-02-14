@@ -13,12 +13,14 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../environments/environment'
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { AddkitchenComponent } from './add-kitchen/addkitchen.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    AddkitchenComponent
   ],
   entryComponents: [
     LoginComponent
