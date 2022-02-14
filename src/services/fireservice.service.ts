@@ -27,4 +27,13 @@ export class FireserviceService {
     return this.firestore.collection("users").doc(data.uid).valueChanges();
   }
 
+
+
+
+
+  // Retrieving the collection kitchen.
+  getKitchen(data){
+    return this.firestore.collection("kitchen").doc(data.uid).valueChanges();
+  }
+
 }

@@ -10,7 +10,11 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+  },  {
+    path: 'view-kitchen',
+    loadChildren: () => import('./view-kitchen/view-kitchen.module').then( m => m.ViewKitchenPageModule)
   }
+
 ];
 @NgModule({
   imports: [
