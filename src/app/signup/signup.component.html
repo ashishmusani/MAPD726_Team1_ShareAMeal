@@ -16,9 +16,19 @@
       </ion-item>
     </ion-row>
     <ion-row class="ion-justify-content-center ion-padding-vertical">
+      <ion-item>
+        I am a&nbsp;
+        <ion-select interface="popover" placeholder="<...>" style="width: 8rem;" (ionChange)="userTypeChanged($event)">
+          <ion-select-option value="customer">customer</ion-select-option>
+          <ion-select-option value="cook">cook</ion-select-option>
+          <ion-select-option value="deliveryAgent">delivery agent</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-padding-vertical">
       <ion-button expand="block" size="large" color="medium" (click)="signup()">Signup</ion-button>
     </ion-row>
-    <ion-row class="ion-justify-content-center" style="margin-top: 10vh;">
+    <ion-row class="ion-justify-content-center" style="margin-top: 8vh;">
       <ion-button expand="block" size="large" color="medium" (click)="goBack()">Login</ion-button>
     </ion-row>
   </ion-grid>

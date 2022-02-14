@@ -24,7 +24,7 @@ export class FireserviceService {
   }
 
   getDetails(data){
-    return this.firestore.collection("users").doc(data.uid).valueChanges();
+    return this.firestore.collection("users").doc(data.uid).get();
   }
 
 }
