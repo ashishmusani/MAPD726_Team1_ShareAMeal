@@ -12,11 +12,13 @@ import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../environments/environment'
 import { LoginComponent } from './login/login.component';
+import { AddkitchenComponent } from './add-kitchen/addkitchen.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    AddkitchenComponent
   ],
   entryComponents: [
     LoginComponent
