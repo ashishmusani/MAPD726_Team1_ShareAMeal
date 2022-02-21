@@ -27,7 +27,7 @@ export class FireserviceService {
   }
 
   addNewKitchen(data) {
-    return this.firestore.collection("kitchens").doc().set(data)
+    return this.firestore.collection("kitchens").add(data)
   }
   
   getKitchens(){

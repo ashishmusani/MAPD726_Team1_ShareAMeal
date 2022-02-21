@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { FormsModule } from '@angular/forms';
+import { IonicStorageModule } from '@ionic/storage-angular';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../environments/environment'
@@ -31,7 +32,8 @@ import { AddItemComponent } from './additem/additem.component';
             IonicModule.forRoot(), 
             AppRoutingModule,
             AngularFireModule.initializeApp(environment.firebaseConfig, 'ShareAMeal'),
-            FormsModule
+            FormsModule,
+            IonicStorageModule.forRoot()
           ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

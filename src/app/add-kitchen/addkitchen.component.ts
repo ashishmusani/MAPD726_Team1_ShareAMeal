@@ -4,6 +4,7 @@ import { FireserviceService } from 'src/services/fireservice.service';
 import { ToastController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Observable } from 'rxjs';
+import { StorageService } from 'src/services/storage-service.service';
 
 @Component({
   selector: 'addkitchen',
@@ -17,12 +18,12 @@ export class AddkitchenComponent implements OnInit {
   public cookName: String;
   public contactNo: String;
   public currentUserId: String;
-  public kitchens: any[];
 
-  constructor(public router: Router, public fireService: FireserviceService, public toastController: ToastController, public auth: AngularFireAuth) {
-    fireService.auth.currentUser.then(user => {
-      if(user)
-        this.currentUserId = user.uid
+  constructor(public router: Router, public fireService: FireserviceService, 
+              public toastController: ToastController, public auth: AngularFireAuth,
+              public storageService: StorageService) {
+    this.storageService.get('userId').then(userId => {
+      this.currentUserId = userId
     })
   }
 
@@ -38,7 +39,9 @@ export class AddkitchenComponent implements OnInit {
       contactNo: this.contactNo,
       userId: this.currentUserId
     }
-    this.fireService.addNewKitchen(data).then(res => {
+    this.fireService.addNewKitchen(data).then(ref => {
+      console.log(ref.id)
+      this.storageService.set('kitchenId', ref.id);
       this.router.navigate(['/cook/kitchen']);
       this.presentToast();
     }, err => {

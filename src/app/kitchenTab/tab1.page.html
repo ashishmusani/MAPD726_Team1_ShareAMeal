@@ -1,6 +1,6 @@
 <ion-content class="ion-justify-content-center" [fullscreen]="true">
   <ion-grid>
-    <ion-row class="ion-justify-content-center"  style="margin-top: 30vh;">
+    <ion-row *ngIf="!this.kitchenExists" class="ion-justify-content-center" style="margin-top: 30vh;">
         <ion-button size="large" style="height: fit-content;" (click)="addKitchenClicked()">
           <ion-grid>
           <ion-row class="ion-justify-content-center" >
@@ -12,7 +12,7 @@
           </ion-grid>
         </ion-button>
     </ion-row>
-    <ion-row class="ion-justify-content-center"  style="margin-top: 30vh;">
+    <ion-row *ngIf="this.kitchenExists" class="ion-justify-content-center"  style="margin-top: 30vh;">
       <ion-button size="large" style="height: fit-content;" (click)="addItemClicked()">
         <ion-grid>
         <ion-row class="ion-justify-content-center" >
