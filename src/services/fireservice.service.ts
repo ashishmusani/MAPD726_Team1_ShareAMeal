@@ -8,7 +8,6 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 export class FireserviceService {
 
   constructor(public firestore: AngularFirestore, public auth: AngularFireAuth) {
-
   }
 
   loginWithEmail(data) {
@@ -33,6 +32,10 @@ export class FireserviceService {
   
   getKitchens(){
     return this.firestore.collection("kitchens").doc().get();
+  }
+
+  addItem(data){
+    return this.firestore.collection("items").doc().set(data)
   }
 
 }

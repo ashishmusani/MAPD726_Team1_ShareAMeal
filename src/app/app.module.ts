@@ -14,13 +14,15 @@ import { environment } from '../environments/environment'
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { AddkitchenComponent } from './add-kitchen/addkitchen.component';
+import { AddItemComponent } from './additem/additem.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SignupComponent,
-    AddkitchenComponent
+    AddkitchenComponent,
+    AddItemComponent
   ],
   entryComponents: [
     LoginComponent

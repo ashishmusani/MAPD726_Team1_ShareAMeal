@@ -10,13 +10,15 @@ import { Router } from '@angular/router';
 })
 export class Tab1Page {
 
-  kitchens: Observable<any[]>;
-
   constructor(firestore: AngularFirestore, private router: Router) {
-    this.kitchens = firestore.collection('kitchens').valueChanges();
+    
   }
 
   addKitchenClicked(){
     this.router.navigate(['/cook/kitchen/add']);
+  }
+
+  addItemClicked(){
+    this.router.navigate(['/cook/kitchen/additem']);
   }
 }
