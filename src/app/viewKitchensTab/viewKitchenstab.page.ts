@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { StorageService } from 'src/services/storage-service.service';
+import { FireserviceService } from 'src/services/fireservice.service';
 
 @Component({
   selector: 'app-viewKitchenstab',
@@ -11,13 +11,18 @@ import { StorageService } from 'src/services/storage-service.service';
 })
 export class ViewKitchensTabPage implements OnInit {
 
- 
+  private kitchens = [];
   
-  constructor(firestore: AngularFirestore, private router: Router, public storageService: StorageService) {
+  constructor(public fireService: FireserviceService, private router: Router, public storageService: StorageService) {
     
   }
 
   ngOnInit(): void {
-
+    this.fireService.getKitchens().subscribe(querySnapshot => {
+      querySnapshot.forEach(doc => {
+        this.kitchens.push(doc.data())
+      })
+      console.log(this.kitchens)
+    })
   }
 }

@@ -31,7 +31,7 @@ export class FireserviceService {
   }
   
   getKitchens(){
-    return this.firestore.collection("kitchens").doc().get();
+    return this.firestore.collection("kitchens").get();
   }
 
   addItem(data){
