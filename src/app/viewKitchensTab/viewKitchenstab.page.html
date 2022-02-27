@@ -1,15 +1,12 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title *ngIf="this.kitchenExists">
-      Kitchen
+    <ion-title>
+      Kitchens List
     </ion-title>
-    <ion-buttons slot="end">
-      Close<ion-toggle></ion-toggle>Open
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="!this.kitchenExists">
+<!-- <ion-content *ngIf="!this.kitchenExists">
   <ion-row class="ion-justify-content-center" style="margin-top: 30vh;">
     <ion-button size="large" style="height: fit-content;" (click)="addKitchenClicked()">
       <ion-grid>
@@ -50,4 +47,4 @@
         </ion-grid>
       </ion-button>
   </ion-row>  </ion-grid>
-</ion-content>
+</ion-content> -->

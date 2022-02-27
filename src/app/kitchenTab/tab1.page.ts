@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
@@ -9,12 +9,17 @@ import { StorageService } from 'src/services/storage-service.service';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page {
+export class Tab1Page implements OnInit {
 
   kitchenExists: boolean = false;
   kitchenId: String;
+  private items = [];
   
   constructor(firestore: AngularFirestore, private router: Router, public storageService: StorageService) {
+    
+  }
+
+  ngOnInit(): void {
     this.storageService.get('kitchenId').then(kitchenId => {
       console.log("kitchenId: ", kitchenId)
       if(kitchenId){
@@ -23,7 +28,6 @@ export class Tab1Page {
       }
     })
   }
-
 
   addKitchenClicked(){
     this.router.navigate(['/cook/kitchen/add']);

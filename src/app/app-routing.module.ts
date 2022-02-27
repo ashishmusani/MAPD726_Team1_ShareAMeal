@@ -10,6 +10,10 @@ const routes: Routes = [
     path: 'cook',
     loadChildren: () => import('./cookTabs/tabs.module').then(m => m.TabsPageModule)
   },
+  {
+    path: 'customer',
+    loadChildren: () => import('./customerTabs/tabs.module').then(m => m.CustomerTabsPageModule)
+  },
   { path: '', redirectTo: 'login', pathMatch: 'full' }
 ];
 @NgModule({
