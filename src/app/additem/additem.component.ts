@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router';
 import { FireserviceService } from 'src/services/fireservice.service';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-additem',
@@ -13,7 +14,7 @@ export class AddItemComponent implements OnInit {
   public ingredients: String;
   public description: string;
 
-  constructor(private router: Router, public fireService: FireserviceService) { }
+  constructor(private router: Router, public fireService: FireserviceService, private _location: Location) { }
 
   ngOnInit() {}
 
@@ -22,15 +23,11 @@ export class AddItemComponent implements OnInit {
   }
 
   addItem() {
-    console.log('function ran')
     this.fireService.addItem({itemname: this.itemname, ingredients: this.ingredients, description: this.description}).then(res => {
-      
-        console.log('Item Added')
-    
-        
-        }, err => {
-          alert(err);
-        })
-      }
+      this._location.back();
+      }, err => {
+        alert(err);
+      })
+    }
 
 }

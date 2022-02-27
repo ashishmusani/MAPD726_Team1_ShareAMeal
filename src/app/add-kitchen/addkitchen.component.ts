@@ -18,6 +18,7 @@ export class AddkitchenComponent implements OnInit {
   public cookName: String;
   public contactNo: String;
   public currentUserId: String;
+  public cuisine: String;
 
   constructor(public router: Router, public fireService: FireserviceService, 
               public toastController: ToastController, public auth: AngularFireAuth,
@@ -37,7 +38,8 @@ export class AddkitchenComponent implements OnInit {
       description: this.description,
       cookName: this.cookName,
       contactNo: this.contactNo,
-      userId: this.currentUserId
+      userId: this.currentUserId,
+      cuisine: this.cuisine
     }
     this.fireService.addNewKitchen(data).then(ref => {
       console.log(ref.id)
