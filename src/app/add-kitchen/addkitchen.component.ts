@@ -42,7 +42,6 @@ export class AddkitchenComponent implements OnInit {
       cuisine: this.cuisine
     }
     this.fireService.addNewKitchen(data).then(ref => {
-      console.log(ref.id)
       this.storageService.set('kitchenId', ref.id);
       this.router.navigate(['/cook/kitchen']);
       this.presentToast();

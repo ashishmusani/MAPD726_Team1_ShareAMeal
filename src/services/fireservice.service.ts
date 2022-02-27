@@ -38,4 +38,12 @@ export class FireserviceService {
     return this.firestore.collection("items").doc().set(data)
   }
 
+  getKitchenByUserId(uid){
+    return this.firestore.collection("kitchens", ref => ref.where("userId", "==", uid)).get();
+  }
+
+  getCurrentUser(){
+    return this.auth.currentUser;
+  }
+
 }

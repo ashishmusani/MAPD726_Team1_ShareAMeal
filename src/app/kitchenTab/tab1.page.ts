@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { StorageService } from 'src/services/storage-service.service';
+import { FireserviceService } from 'src/services/fireservice.service';
 
 @Component({
   selector: 'app-tab1',
@@ -15,18 +15,26 @@ export class Tab1Page implements OnInit {
   kitchenId: String;
   private items = [];
   
-  constructor(firestore: AngularFirestore, private router: Router, public storageService: StorageService) {
+  constructor(private router: Router, public storageService: StorageService, public fireService: FireserviceService) {
     
   }
 
+  ionViewWillEnter(){
+    this.fireService.getCurrentUser().then(user => {
+      if(user.uid){
+        console.log(user.uid)
+        this.fireService.getKitchenByUserId(String(user.uid)).subscribe(querySnapshot => {
+          if(querySnapshot.size > 0){
+            this.kitchenExists = true
+            querySnapshot.forEach(doc => {
+              this.kitchenId = doc.id
+            })
+          }
+        })
+      }  
+    });
+  }
   ngOnInit(): void {
-    this.storageService.get('kitchenId').then(kitchenId => {
-      console.log("kitchenId: ", kitchenId)
-      if(kitchenId){
-        this.kitchenExists = true
-        this.kitchenId = kitchenId
-      }
-    })
   }
 
   addKitchenClicked(){
