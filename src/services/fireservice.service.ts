@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { StorageService } from './storage-service.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FireserviceService {
 
-  constructor(public firestore: AngularFirestore, public auth: AngularFireAuth) {
+  constructor(public firestore: AngularFirestore, public auth: AngularFireAuth, public storageService: StorageService) {
   }
 
   loginWithEmail(data) {
@@ -35,7 +36,12 @@ export class FireserviceService {
   }
 
   addItem(data){
-    return this.firestore.collection("items").doc().set(data)
+    return this.storageService.get('kitchenId').then(id => {
+      console.log("kitchen id in add item call: ", id)
+      if(id){
+        return this.firestore.collection("kitchens").doc(id).collection("items").add(data)
+      }
+    })
   }
 
   getKitchenByUserId(uid){

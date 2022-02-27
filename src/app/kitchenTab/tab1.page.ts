@@ -28,6 +28,7 @@ export class Tab1Page implements OnInit {
             this.kitchenExists = true
             querySnapshot.forEach(doc => {
               this.kitchenId = doc.id
+              this.storageService.set('kitchenId', doc.id);
             })
           }
         })
