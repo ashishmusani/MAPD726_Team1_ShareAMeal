@@ -5,6 +5,7 @@ import { ToastController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Observable } from 'rxjs';
 import { StorageService } from 'src/services/storage-service.service';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Component({
   selector: 'addkitchen',
@@ -19,10 +20,13 @@ export class AddkitchenComponent implements OnInit {
   public contactNo: String;
   public currentUserId: String;
   public cuisine: String;
+  errorMessage = '';
+  public imageURL: string;
 
   constructor(public router: Router, public fireService: FireserviceService, 
               public toastController: ToastController, public auth: AngularFireAuth,
-              public storageService: StorageService) {
+              public storageService: StorageService,
+              public angularFireStorageModule: AngularFireStorage) {
     this.storageService.get('userId').then(userId => {
       this.currentUserId = userId
     })
@@ -39,7 +43,8 @@ export class AddkitchenComponent implements OnInit {
       cookName: this.cookName,
       contactNo: this.contactNo,
       userId: this.currentUserId,
-      cuisine: this.cuisine
+      cuisine: this.cuisine,
+      imageURL: this.imageURL
     }
     this.fireService.addNewKitchen(data).then(ref => {
       this.storageService.set('kitchenId', ref.id);
@@ -56,5 +61,19 @@ export class AddkitchenComponent implements OnInit {
       duration: 2000
     });
     toast.present();
+  }
+
+  uploadPhoto(event) {
+    this.fireService.storeImage(event.target.files[0], this.kitchenName).then(
+      (res: any) => {
+        if (res) {
+          console.log(res);
+          this.imageURL = res;
+        } 
+      },
+      (error: any) => {
+        this.errorMessage = 'File size exceeded. Maximum file size 1 MB'
+      }
+    );
   }
 }

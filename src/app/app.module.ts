@@ -16,6 +16,8 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { AddkitchenComponent } from './add-kitchen/addkitchen.component';
 import { AddItemComponent } from './additem/additem.component';
+import { ViewKitchensTabPage } from './viewKitchensTab/viewKitchenstab.page';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { AddItemComponent } from './additem/additem.component';
     LoginComponent,
     SignupComponent,
     AddkitchenComponent,
-    AddItemComponent
+    AddItemComponent,
+    ViewKitchensTabPage
   ],
   entryComponents: [
     LoginComponent
@@ -33,7 +36,8 @@ import { AddItemComponent } from './additem/additem.component';
             AppRoutingModule,
             AngularFireModule.initializeApp(environment.firebaseConfig, 'ShareAMeal'),
             FormsModule,
-            IonicStorageModule.forRoot()
+            IonicStorageModule.forRoot(),
+            AngularFireStorageModule
           ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

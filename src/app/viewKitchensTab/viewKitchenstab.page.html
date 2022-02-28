@@ -9,7 +9,7 @@
 <ion-content>
   <ion-card *ngFor="let kitchen of this.kitchens; index as i;">
     <ion-item>
-      <img src="../../assets/logo.png" style="width: 5rem;">
+      <img src={{kitchen.imageURL}} style="width: 5rem;">
       <ion-label slot="end">
         {{kitchen.averageRating}}
         <ion-icon name="star"></ion-icon>       

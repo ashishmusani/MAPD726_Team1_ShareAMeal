@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { StorageService } from './storage-service.service';
-
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 @Injectable({
   providedIn: 'root'
 })
 export class FireserviceService {
-
-  constructor(public firestore: AngularFirestore, public auth: AngularFireAuth, public storageService: StorageService) {
+  private locationUpload = "uploads/";
+  constructor(public firestore: AngularFirestore, public auth: AngularFireAuth, public storageService: StorageService,
+    public angularFireStorage: AngularFireStorage) {
   }
 
   loginWithEmail(data) {
@@ -50,6 +51,24 @@ export class FireserviceService {
 
   getCurrentUser(){
     return this.auth.currentUser;
+  }
+
+  async storeImage(imageData: any, imageName) {
+    try {
+      return new Promise((resolve, reject) => {
+        const pictureRef = this.angularFireStorage.ref(this.locationUpload + imageName);
+        pictureRef
+          .put(imageData)
+          .then(function () {
+            pictureRef.getDownloadURL().subscribe((url: any) => {
+              resolve(url);
+            });
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
+    } catch (e) {}
   }
 
 }
