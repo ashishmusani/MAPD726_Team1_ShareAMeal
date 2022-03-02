@@ -7,13 +7,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
 export class SessionService {
 
   public uid = '';
-  /* private uidSub = new Subject<string>();
-  uidObs = this.uidSub.asObservable(); */
+
   constructor() { }
-
-  /* getUid() {
-    this.uid
-  }) */
-
 
 }
