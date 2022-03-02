@@ -45,4 +45,8 @@ export class Tab1Page implements OnInit {
   addItemClicked(){
     this.router.navigate(['/cook/kitchen/additem']);
   }
+
+  viewItemClicked() {
+    this.router.navigate(['/cook/kitchen/viewitem']);
+  }
 }

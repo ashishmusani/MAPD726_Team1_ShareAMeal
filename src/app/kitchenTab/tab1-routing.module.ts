@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddkitchenComponent } from '../add-kitchen/addkitchen.component';
 import { AddItemComponent } from '../additem/additem.component';
+import { ViewItemComponent } from '../view-item/view-item.component';
 import { Tab1Page } from './tab1.page';
 
 const routes: Routes = [
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'additem',
     component: AddItemComponent
+  },
+  {
+    path:'viewitem',
+    component: ViewItemComponent
   }
 ];
 

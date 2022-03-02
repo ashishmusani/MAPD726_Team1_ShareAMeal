@@ -45,6 +45,15 @@ export class FireserviceService {
     })
   }
 
+  getItems() {
+    return this.storageService.get('kitchenId').then(id => {
+      console.log("kitchen id in add item call: ", id)
+      if(id){
+        return this.firestore.collection("kitchens").doc(id).collection("items").get();
+      }
+    });
+  }
+
   getKitchenByUserId(uid){
     return this.firestore.collection("kitchens", ref => ref.where("userId", "==", uid)).get();
   }

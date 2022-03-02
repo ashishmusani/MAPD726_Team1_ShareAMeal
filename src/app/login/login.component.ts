@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FireserviceService } from 'src/services/fireservice.service';
+import { SessionService } from 'src/services/session.service';
 import {StorageService} from 'src/services/storage-service.service';
 
 @Component({
@@ -13,7 +14,9 @@ export class LoginComponent implements OnInit {
   public email: String;
   public password: String;
 
-  constructor(public router: Router, public fireService: FireserviceService, public storageService: StorageService) {
+  constructor(public router: Router, public fireService: FireserviceService, 
+    public storageService: StorageService,
+    private session: SessionService) {
    }
 
   ngOnInit() {}
@@ -26,7 +29,8 @@ export class LoginComponent implements OnInit {
         this.fireService.getDetails({uid: res.user.uid}).subscribe(data => {
           if(data.exists){
             let currentUser = data.data();
-            console.log(currentUser)
+            console.log(currentUser);
+            this.session.uid = currentUser['uid'];
             if(currentUser['userType'] === 'cook')
               this.router.navigate(['/cook/kitchen'])
             else if (currentUser['userType'] === 'customer')
