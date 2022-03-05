@@ -75,4 +75,7 @@ export class FireserviceService {
     return this.firestore.collection("kitchens").doc(id).get()
   }
 
+  changeKitchenStatus(id: String, isOpen: boolean){
+    return this.firestore.collection("kitchens").doc(id.toString()).update({kitchenIsOpen: isOpen})
+  }
 }

@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { StorageService } from 'src/services/storage-service.service';
 import { FireserviceService } from 'src/services/fireservice.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -16,7 +17,8 @@ export class Tab1Page implements OnInit {
   private items = [];
   private kitchen;
   
-  constructor(private router: Router, public storageService: StorageService, public fireService: FireserviceService) {
+  constructor(private router: Router, public storageService: StorageService, 
+              public fireService: FireserviceService, public toastController: ToastController) {
     
   }
 
@@ -43,6 +45,23 @@ export class Tab1Page implements OnInit {
   }
 
   kitchenStatusChange(){
-    console.log("kithcen status changed")
+    let newStatus;
+    if(this.kitchen.kitchenIsOpen){
+      newStatus = false;
+    } else {
+      newStatus = true;
+    }
+    this.fireService.changeKitchenStatus(this.kitchenId, newStatus).then(res => {
+      this.kitchen.kitchenIsOpen = newStatus
+      this.presentToast(newStatus? "open" : "closed");
+    })
+  }
+
+  async presentToast(newStatus) {
+    const toast = await this.toastController.create({
+      message: `Kitchen is ${newStatus} now`,
+      duration: 2000
+    });
+    toast.present();
   }
 }
