@@ -1,7 +1,7 @@
-<ion-header>
+<ion-header *ngIf="this.kitchenExists">
   <ion-toolbar>
-    <ion-title *ngIf="this.kitchenExists">
-      Kitchen
+    <ion-title>
+      {{ this.kitchen.kitchenName }}
     </ion-title>
     <ion-buttons slot="end">
       Close<ion-toggle></ion-toggle>Open
@@ -10,14 +10,14 @@
 </ion-header>
 
 <ion-content *ngIf="!this.kitchenExists">
-  <ion-row class="ion-justify-content-center" style="margin-top: 30vh;">
-    <ion-button size="large" style="height: fit-content;" (click)="addKitchenClicked()">
+  <ion-row class="ion-justify-content-center" style="margin-top: 35vh;">
+    <ion-button size="large" color="warning" style="height: fit-content;" (click)="addKitchenClicked()">
       <ion-grid>
       <ion-row class="ion-justify-content-center" >
-        <ion-label style="font-size: 5rem;">+</ion-label>        
+        <ion-label style="font-size: 4rem;">+</ion-label>        
       </ion-row>
       <ion-row>
-        <ion-label  style="font-size: 2rem;">Add Kitchen</ion-label>
+        <ion-label  style="font-size: 1.5rem; margin-bottom: 1rem;">Create Kitchen</ion-label>
       </ion-row>
       </ion-grid>
     </ion-button>
@@ -25,29 +25,16 @@
 </ion-content>
 
 <ion-content *ngIf="this.kitchenExists" class="ion-justify-content-center" [fullscreen]="true">
-  <ion-grid>
-    <ion-row *ngIf="!this.kitchenExists" class="ion-justify-content-center" style="margin-top: 30vh;">
-        <ion-button size="large" style="height: fit-content;" (click)="addKitchenClicked()">
-          <ion-grid>
-          <ion-row class="ion-justify-content-center" >
-            <ion-label style="font-size: 5rem;">+</ion-label>        
-          </ion-row>
-          <ion-row>
-            <ion-label  style="font-size: 2rem;">Add Kitchen</ion-label>
-          </ion-row>
-          </ion-grid>
-        </ion-button>
-    </ion-row>
-    <ion-row *ngIf="this.kitchenExists" class="ion-justify-content-center"  style="margin-top: 30vh;">
-      <ion-button size="large" style="height: fit-content;" (click)="addItemClicked()">
+  <ion-row *ngIf="this.kitchenExists" class="ion-justify-content-center"  style="margin-top: 30vh;">
+      <ion-button size="large" color="warning" style="height: fit-content;" (click)="addItemClicked()">
         <ion-grid>
         <ion-row class="ion-justify-content-center" >
-          <ion-label style="font-size: 5rem;">+</ion-label>        
+          <ion-label style="font-size: 4rem;">+</ion-label>        
         </ion-row>
         <ion-row>
-          <ion-label  style="font-size: 2rem;">Add Item</ion-label>
+          <ion-label  style="font-size: 1.5rem; margin-bottom: 1rem;">Add Item</ion-label>
         </ion-row>
         </ion-grid>
       </ion-button>
-  </ion-row>  </ion-grid>
+  </ion-row>
 </ion-content>

@@ -14,6 +14,7 @@ export class Tab1Page implements OnInit {
   kitchenExists: boolean = false;
   kitchenId: String;
   private items = [];
+  private kitchen;
   
   constructor(private router: Router, public storageService: StorageService, public fireService: FireserviceService) {
     
@@ -27,6 +28,8 @@ export class Tab1Page implements OnInit {
           if(querySnapshot.size > 0){
             this.kitchenExists = true
             querySnapshot.forEach(doc => {
+              console.log(doc.data())
+              this.kitchen = doc.data();
               this.kitchenId = doc.id
               this.storageService.set('kitchenId', doc.id);
             })
