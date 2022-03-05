@@ -14,6 +14,10 @@ const routes: Routes = [
     path: 'customer',
     loadChildren: () => import('./customerTabs/tabs.module').then(m => m.CustomerTabsPageModule)
   },
+  {
+    path: 'items-in-kitchens/:userId',
+    loadChildren: () => import('./items-in-kitchens/items-in-kitchens.module').then( m => m.ItemsInKitchensPageModule)
+  },
   { path: '', redirectTo: 'login', pathMatch: 'full' }
 ];
 @NgModule({

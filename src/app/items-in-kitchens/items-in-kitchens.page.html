@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>All Items</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/customer/kitchens"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let item of this.items">
+    <ion-item>
+      <img src='../../assets/chef.png' style="width: 5rem;">
+      
+      <ion-card-header>
+        <ion-card-title>{{item.itemname}}</ion-card-title>
+        <ion-card-subtitle color="primary">
+          {{item.description}}
+        </ion-card-subtitle>
+        <ion-card-subtitle color="secondary"><em>{{item.ingredients}}</em></ion-card-subtitle>
+        </ion-card-header>
+    </ion-item>
+  </ion-card>
+</ion-content>
