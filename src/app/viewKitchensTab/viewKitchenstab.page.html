@@ -7,9 +7,17 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="loadKitchensList($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Pull to refresh"
+      refreshingSpinner="lines"
+      refreshingText="Reloading kitchens">
+    </ion-refresher-content>
+  </ion-refresher>
   <ion-card *ngFor="let kitchen of this.kitchens; index as i;">
-    <ion-item>
-      <img src={{kitchen.imageURL}} style="width: 5rem;">
+    <ion-item *ngIf="kitchen.kitchenIsOpen">
+      <img src={{kitchen.imageURL}} style="width: 5rem; height: 5rem">
       <ion-label slot="end">
         {{kitchen.averageRating}}
         <ion-icon name="star"></ion-icon>       
