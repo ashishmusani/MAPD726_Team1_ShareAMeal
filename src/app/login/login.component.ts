@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FireserviceService } from 'src/services/fireservice.service';
 import {StorageService} from 'src/services/storage-service.service';
+import { AlertService } from 'src/services/alert-service.service';
 
 @Component({
   selector: 'app-login',
@@ -13,8 +14,9 @@ export class LoginComponent implements OnInit {
   public email: String;
   public password: String;
 
-  constructor(public router: Router, public fireService: FireserviceService, public storageService: StorageService) {
-   }
+  constructor(public router: Router, public fireService: FireserviceService, public storageService: StorageService, private alertService: AlertService) {
+  
+  }
 
   ngOnInit() {}
 
@@ -35,7 +37,7 @@ export class LoginComponent implements OnInit {
         })
       }
     }, err => {
-      alert(err.message)
+      this.alertService.genericAlert("Error", "You have entered an invalid email or password")
     })
   }
 
