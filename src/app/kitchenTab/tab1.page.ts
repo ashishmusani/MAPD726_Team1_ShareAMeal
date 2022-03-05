@@ -21,22 +21,15 @@ export class Tab1Page implements OnInit {
   }
 
   ionViewWillEnter(){
-    this.fireService.getCurrentUser().then(user => {
-      if(user.uid){
-        console.log(user.uid)
-        this.fireService.getKitchenByUserId(String(user.uid)).subscribe(querySnapshot => {
-          if(querySnapshot.size > 0){
-            this.kitchenExists = true
-            querySnapshot.forEach(doc => {
-              console.log(doc.data())
-              this.kitchen = doc.data();
-              this.kitchenId = doc.id
-              this.storageService.set('kitchenId', doc.id);
-            })
-          }
+    this.storageService.get("kitchenId").then(kId => {
+      this.kitchenId = kId
+      if(this.kitchenId){
+        this.fireService.getKitchen(kId).subscribe(doc => {
+          this.kitchenExists = true;
+          this.kitchen = doc.data();
         })
-      }  
-    });
+      }
+    })
   }
   ngOnInit(): void {
   }

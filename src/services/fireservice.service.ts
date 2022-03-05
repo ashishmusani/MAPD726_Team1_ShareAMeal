@@ -71,4 +71,8 @@ export class FireserviceService {
     } catch (e) {}
   }
 
+  getKitchen(id){
+    return this.firestore.collection("kitchens").doc(id).get()
+  }
+
 }
