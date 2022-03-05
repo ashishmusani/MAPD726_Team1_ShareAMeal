@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-card *ngFor="let kitchen of this.kitchens; index as i;">
+  <ion-card *ngFor="let kitchen of this.kitchens; index as i;" [routerLink]="['/','items-in-kitchens', kitchen.userId]">
     <ion-item>
       <img src={{kitchen.imageURL}} style="width: 5rem;">
       <ion-label slot="end">
