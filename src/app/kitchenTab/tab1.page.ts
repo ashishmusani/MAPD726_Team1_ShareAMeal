@@ -48,4 +48,8 @@ export class Tab1Page implements OnInit {
   addItemClicked(){
     this.router.navigate(['/cook/kitchen/additem']);
   }
+
+  kitchenStatusChange(){
+    console.log("kithcen status changed")
+  }
 }

@@ -4,7 +4,7 @@
       {{ this.kitchen.kitchenName }}
     </ion-title>
     <ion-buttons slot="end">
-      Close<ion-toggle></ion-toggle>Open
+      Close<ion-toggle (ionChange)="kitchenStatusChange()"></ion-toggle>Open
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

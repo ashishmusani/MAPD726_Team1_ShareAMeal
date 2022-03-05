@@ -27,4 +27,13 @@ export class StorageService {
   public get(key: string) {
     return this._storage?.get(key).then(val => val)
   }
+
+  public remove(key: string){
+    return this._storage.remove(key).then(res => res)
+  }
+
+  public clear(){
+    return this._storage.clear().then(res => res)
+  }
+
 }
