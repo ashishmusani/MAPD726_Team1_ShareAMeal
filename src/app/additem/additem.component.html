@@ -32,6 +32,12 @@
       </ion-item>
     </ion-row>
     <ion-row class="ion-justify-content-center ion-padding-vertical">
+      <ion-item>
+        <ion-label position="fixed">Image</ion-label>
+        <input type="file" (change)="uploadPhoto($event)" />
+      </ion-item>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-padding-vertical">
       <ion-button expand="block" size="large" color="warning" (click)="addItem()">Add</ion-button>
     </ion-row>
   </ion-grid>
