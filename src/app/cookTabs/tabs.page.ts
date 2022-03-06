@@ -19,6 +19,7 @@ export class TabsPage {
           if(querySnapshot.size > 0){
             querySnapshot.forEach(doc => {
               this.storageService.set('kitchenId', doc.id);
+              console.log("kitchen set")
             })
           }
         })

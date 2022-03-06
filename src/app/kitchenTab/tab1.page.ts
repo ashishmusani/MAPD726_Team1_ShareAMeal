@@ -38,6 +38,28 @@ export class Tab1Page implements OnInit {
             }
           })
         })
+      } else {
+
+        this.storageService.get("userId").then(uid => {
+          this.fireService.getKitchenByUserId(String(uid)).subscribe(querySnapshot => {
+            if(querySnapshot.size > 0){
+              this.kitchenExists = true
+              querySnapshot.forEach(doc => {
+                this.kitchen = doc.data()
+                this.kitchenId = doc.id
+                this.storageService.set('kitchenId', doc.id);
+              })
+              this.fireService.getItemsInKitchen(this.kitchenId).subscribe(querySnapshot => {
+                if(querySnapshot.size > 0){
+                  querySnapshot.forEach(doc => {
+                    this.items.push(doc.data())
+                  })
+                }
+              })
+            }
+          })
+      });
+
       }
     })
   }
