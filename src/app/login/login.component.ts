@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
             let currentUser = data.data();
             console.log(currentUser)
             if(currentUser['userType'] === 'cook')
-              this.router.navigate(['/cook/kitchen'])
+              this.router.navigate(['/cook'])
             else if (currentUser['userType'] === 'customer')
               this.router.navigate(['/customer/kitchens'])
           }
