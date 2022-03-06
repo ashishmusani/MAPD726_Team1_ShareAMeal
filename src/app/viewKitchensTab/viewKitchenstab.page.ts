@@ -18,11 +18,22 @@ export class ViewKitchensTabPage implements OnInit {
   }
 
   ngOnInit(): void {
+    this.kitchens = [];
     this.fireService.getKitchens().subscribe(querySnapshot => {
       querySnapshot.forEach(doc => {
         this.kitchens.push(doc.data())
       })
       console.log(this.kitchens)
+    })
+  }
+
+  loadKitchensList(event){
+    this.kitchens = [];
+    this.fireService.getKitchens().subscribe(querySnapshot => {
+      querySnapshot.forEach(doc => {
+        this.kitchens.push(doc.data())
+      })
+      event.target.complete();
     })
   }
 }
