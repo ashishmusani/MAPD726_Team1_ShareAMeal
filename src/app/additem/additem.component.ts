@@ -3,7 +3,10 @@ import { Router } from '@angular/router';
 import { FireserviceService } from 'src/services/fireservice.service';
 import {Location} from '@angular/common';
 import { ToastController } from '@ionic/angular';
-import { AlertService } from 'src/services/alert-service.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Observable } from 'rxjs';
+import { StorageService } from 'src/services/storage-service.service';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Component({
   selector: 'app-additem',
@@ -15,32 +18,65 @@ export class AddItemComponent implements OnInit {
   public itemname: String;
   public ingredients: String;
   public description: string;
+  public currentKitchenId: String;
+  public imageURL: string;
+  errorMessage = '';
 
-  constructor(private router: Router, public fireService: FireserviceService, 
-              private _location: Location, public toastController: ToastController,
-              private alertService: AlertService) { }
+  constructor(private router: Router, public fireService: FireserviceService, private _location: Location, public toastController: ToastController, public auth: AngularFireAuth,
+              public storageService: StorageService,
+              public angularFireStorageModule: AngularFireStorage) {
+                this.storageService.get('kitchenId').then(kitchenId => {
+                  this.currentKitchenId = kitchenId
+                })
+              }
 
   ngOnInit() {}
 
   goBack(){
-    this.router.navigate(['/kitchen']);
+    this.router.navigate(['/cook/kitchen']);
   }
 
   addItem() {
-    this.fireService.addItem({itemname: this.itemname, ingredients: this.ingredients, description: this.description}).then(res => {
-      this._location.back();
+    let kitchenId = this.currentKitchenId || 'dummyId'; //should get current user id
+    console.log("kitchenId: ", kitchenId)
+    let data = {
+      itemname: this.itemname,
+      description: this.description,
+      ingredients: this.ingredients,
+      kitchenId: this.currentKitchenId,
+      imageURL: this.imageURL,
+    }
+    this.fireService.addItem(data).then(ref => {
+      this.storageService.set('itemId', ref.id);
+      this.router.navigate(['/cook/kitchen']);
       this.presentToast();
       }, err => {
-        this.alertService.genericAlert("Error", "There was a problem. Please try again.")
+        alert(err);
       })
     }
 
     async presentToast() {
       const toast = await this.toastController.create({
-        message: 'Item added successfully',
+        message: 'Item created successfully',
         duration: 2000
       });
       toast.present();
     }
 
+    uploadPhoto(event) {
+      this.fireService.storeImage(event.target.files[0], this.itemname).then(
+        (res: any) => {
+          if (res) {
+            console.log(res);
+            this.imageURL = res;
+          } 
+        },
+        (error: any) => {
+          this.errorMessage = 'File size exceeded. Maximum file size 1 MB'
+        }
+      );
+    }
+
 }
+
+
