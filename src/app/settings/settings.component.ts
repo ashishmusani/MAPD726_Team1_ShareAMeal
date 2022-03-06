@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from 'src/services/storage-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-settings',
@@ -8,11 +9,16 @@ import { StorageService } from 'src/services/storage-service.service';
 })
 export class SettingsComponent implements OnInit {
 
-  constructor(public storageService: StorageService) { }
+  constructor(public storageService: StorageService, public router: Router) { }
 
   ngOnInit() {}
 
   logout(){
-    this.storageService.clear().then(res => console.log(res))
+    try{
+      this.storageService.clear();
+      this.router.navigate(['/'])
+    } catch (err) {
+    }
+
   }
 }
