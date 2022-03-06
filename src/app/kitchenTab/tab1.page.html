@@ -26,17 +26,20 @@
   </ion-row>
 </ion-content>
 
-<ion-content *ngIf="this.kitchenExists" class="ion-justify-content-center" [fullscreen]="true">
-  <ion-row *ngIf="this.kitchenExists" class="ion-justify-content-center"  style="margin-top: 30vh;">
-      <ion-button size="large" color="warning" style="height: fit-content;" (click)="addItemClicked()">
-        <ion-grid>
-        <ion-row class="ion-justify-content-center" >
-          <ion-label style="font-size: 4rem;">+</ion-label>        
-        </ion-row>
-        <ion-row>
-          <ion-label  style="font-size: 1.5rem; margin-bottom: 1rem;">Add Item</ion-label>
-        </ion-row>
-        </ion-grid>
+<ion-content *ngIf="this.kitchenExists" [fullscreen]="true">
+      <ion-button *ngIf="this.kitchenExists" style="font-size: 1rem; margin: 1rem" size="large" expand="full" color="warning" (click)="addItemClicked()">
+        Add Item
       </ion-button>
-  </ion-row>
+    <ion-card *ngFor="let item of this.items">
+      <ion-item>
+        <img src='../../assets/chef.png' style="width: 5rem; height: 5rem;">
+        <ion-card-header>
+          <ion-card-title>{{item.itemname}}</ion-card-title>
+          <ion-card-subtitle color="primary">
+            {{item.description}}
+          </ion-card-subtitle>
+          <ion-card-subtitle color="secondary"><em>{{item.ingredients}}</em></ion-card-subtitle>
+          </ion-card-header>
+      </ion-item>
+    </ion-card>
 </ion-content>

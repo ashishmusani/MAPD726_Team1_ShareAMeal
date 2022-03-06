@@ -79,7 +79,7 @@ export class FireserviceService {
     return this.firestore.collection("kitchens").doc(id.toString()).update({kitchenIsOpen: isOpen})
   }
 
-  getItemsInKitchen(uid, kitchenId){
-    return this.firestore.collection("kitchens", ref => ref.where("userId", "==", uid)).doc(kitchenId).collection("items").get();
+  getItemsInKitchen(kitchenId){
+    return this.firestore.collection("kitchens").doc(kitchenId).collection("items").get();
   }
 }

@@ -23,12 +23,20 @@ export class Tab1Page implements OnInit {
   }
 
   ionViewWillEnter(){
+    this.items = []
     this.storageService.get("kitchenId").then(kId => {
       this.kitchenId = kId
       if(this.kitchenId){
         this.fireService.getKitchen(kId).subscribe(doc => {
           this.kitchenExists = true;
           this.kitchen = doc.data();
+          this.fireService.getItemsInKitchen(kId).subscribe(querySnapshot => {
+            if(querySnapshot.size > 0){
+              querySnapshot.forEach(doc => {
+                this.items.push(doc.data())
+              })
+            }
+          })
         })
       }
     })

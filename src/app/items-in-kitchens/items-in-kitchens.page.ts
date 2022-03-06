@@ -21,7 +21,8 @@ export class ItemsInKitchensPage implements OnInit {
         querySnapshot.forEach(doc => {
           this.kitchenName = doc.data()['kitchenName']
            // get all items that belonged to kitchen
-           this.fireService.getItemsInKitchen(String(userId), doc.id).subscribe(querySnapshot => {
+           this.items = []
+           this.fireService.getItemsInKitchen(doc.id).subscribe(querySnapshot => {
             if(querySnapshot.size > 0){
               querySnapshot.forEach(doc => {
                 this.items.push(doc.data())
