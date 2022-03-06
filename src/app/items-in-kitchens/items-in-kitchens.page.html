@@ -10,7 +10,7 @@
 <ion-content>
   <ion-card *ngFor="let item of this.items">
     <ion-item>
-      <img src='../../assets/chef.png' style="width: 5rem; height: 5rem;">
+      <img src={{item.imageURL}} style="width: 5rem; height: 5rem;">
       
       <ion-card-header>
         <ion-card-title>{{item.itemname}}</ion-card-title>
