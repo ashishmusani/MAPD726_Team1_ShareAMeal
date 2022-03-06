@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-card *ngFor="let item of this.items">
+  <ion-card *ngFor="let item of this.items" [routerLink]="['/','items-details', this.kitchenId, item.itemId]">
     <ion-item>
       <img src='../../assets/chef.png' style="width: 5rem; height: 5rem;">
       
@@ -18,7 +18,7 @@
           {{item.description}}
         </ion-card-subtitle>
         <ion-card-subtitle color="secondary"><em>{{item.ingredients}}</em></ion-card-subtitle>
-        </ion-card-header>
+      </ion-card-header>
     </ion-item>
   </ion-card>
 </ion-content>

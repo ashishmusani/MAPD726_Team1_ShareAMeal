@@ -10,6 +10,7 @@ import { FireserviceService } from 'src/services/fireservice.service';
 export class ItemsInKitchensPage implements OnInit {
   private items = [];
   kitchenName: String;
+  kitchenId: String;
 
   constructor(private activatedRoute: ActivatedRoute,
     private fireService: FireserviceService) { }
@@ -22,11 +23,14 @@ export class ItemsInKitchensPage implements OnInit {
           this.kitchenName = doc.data()['kitchenName']
            // get all items that belonged to kitchen
            this.items = []
+           this.kitchenId = doc.id
            this.fireService.getItemsInKitchen(doc.id).subscribe(querySnapshot => {
             if(querySnapshot.size > 0){
               querySnapshot.forEach(doc => {
-                this.items.push(doc.data())
+                const itemId = doc.id
+                this.items.push({...doc.data(), itemId})
               })
+              console.log(this.items)
             }
           })
         })
