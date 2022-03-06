@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>All Items</ion-title>
+    <ion-title>{{this.kitchenName}}</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/customer/kitchens"></ion-back-button>
     </ion-buttons>
@@ -10,7 +10,7 @@
 <ion-content>
   <ion-card *ngFor="let item of this.items">
     <ion-item>
-      <img src='../../assets/chef.png' style="width: 5rem;">
+      <img src='../../assets/chef.png' style="width: 5rem; height: 5rem;">
       
       <ion-card-header>
         <ion-card-title>{{item.itemname}}</ion-card-title>
