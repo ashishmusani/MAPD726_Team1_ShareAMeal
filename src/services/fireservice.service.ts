@@ -82,4 +82,9 @@ export class FireserviceService {
   getItemsInKitchen(kitchenId){
     return this.firestore.collection("kitchens").doc(kitchenId).collection("items").get();
   }
+
+  getItem(kitchenId,itemId)
+  {
+    return this.firestore.collection("kitchens").doc(kitchenId).collection("items").doc(itemId).get();
+  }
 }

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { ItemDetailsComponent } from './item-details/item-details.component'
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -17,6 +18,10 @@ const routes: Routes = [
   {
     path: 'items-in-kitchens/:userId',
     loadChildren: () => import('./items-in-kitchens/items-in-kitchens.module').then( m => m.ItemsInKitchensPageModule)
+  },
+  {
+    path: 'items-details/:kitchenId/:itemId',
+    component: ItemDetailsComponent
   },
   { path: '', redirectTo: 'login', pathMatch: 'full' }
 ];
