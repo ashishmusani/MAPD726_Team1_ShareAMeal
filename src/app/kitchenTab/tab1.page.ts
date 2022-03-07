@@ -33,7 +33,8 @@ export class Tab1Page implements OnInit {
           this.fireService.getItemsInKitchen(kId).subscribe(querySnapshot => {
             if(querySnapshot.size > 0){
               querySnapshot.forEach(doc => {
-                this.items.push(doc.data())
+                const itemId = doc.id
+                this.items.push({...doc.data(), itemId})
               })
             }
           })
@@ -52,7 +53,8 @@ export class Tab1Page implements OnInit {
               this.fireService.getItemsInKitchen(this.kitchenId).subscribe(querySnapshot => {
                 if(querySnapshot.size > 0){
                   querySnapshot.forEach(doc => {
-                    this.items.push(doc.data())
+                    const itemId = doc.id
+                    this.items.push({...doc.data(), itemId})
                   })
                 }
               })

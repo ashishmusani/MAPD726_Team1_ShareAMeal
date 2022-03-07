@@ -123,4 +123,8 @@ export class FireserviceService {
   createOrder(orderData){
     return this.firestore.collection("orders").add(orderData);
   }
+  
+  updateItem(kitchenId, itemId, data){
+    return this.firestore.collection("kitchens").doc(kitchenId).collection("items").doc(itemId).update(data);
+  }
 }

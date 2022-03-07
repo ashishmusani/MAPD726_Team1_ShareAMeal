@@ -32,7 +32,7 @@
   </ion-button>
 </ion-header>
 <ion-content *ngIf="this.kitchenExists" [fullscreen]="true">
-    <ion-card *ngFor="let item of this.items">
+    <ion-card *ngFor="let item of this.items" [routerLink]="['/','update-item', this.kitchenId, this.item.itemId]">
       <ion-item>
         <img src={{item.imageURL}} style="width: 5rem; height: 5rem;">
         <ion-card-header>

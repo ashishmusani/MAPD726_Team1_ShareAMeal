@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { ItemDetailsComponent } from './item-details/item-details.component'
 import { CheckoutComponent } from './checkout/checkout.component'
+import { UpdateItemComponent } from './update-item/update-item.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -32,7 +33,12 @@ const routes: Routes = [
   {
     path: 'checkout/:userId/:kitchenId',
     component: CheckoutComponent
-  }
+  },
+  {
+    path: 'update-item/:kitchenId/:itemId',
+    component: UpdateItemComponent
+  },
+  { path: '', redirectTo: 'login', pathMatch: 'full' }
 ];
 @NgModule({
   imports: [

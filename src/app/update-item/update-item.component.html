@@ -10,36 +10,32 @@
   <ion-grid>
     <ion-row class="ion-justify-content-center">
       <ion-label class="ion-justify-content-center ion-padding-vertical lbl" position="floating" color="warning">
-        ITEM
+        Update Item
       </ion-label>
     </ion-row>
     <ion-row class="ion-justify-content-center ion-padding-vertical" style="margin-top: 15vh;">
       <ion-item>
         <ion-label position="floating">Item Name</ion-label>
-        <ion-input [(ngModel)]="itemname"></ion-input>
+        <ion-input [(ngModel)]="this.item.itemname"></ion-input>
       </ion-item>
     </ion-row>
     <ion-row class="ion-justify-content-center ion-padding-vertical">
       <ion-item>
         <ion-label position="floating">Ingredients</ion-label>
-        <ion-input [(ngModel)]="ingredients"></ion-input>
+        <ion-input [(ngModel)]="this.item.ingredients"></ion-input>
       </ion-item>
     </ion-row>
     <ion-row class="ion-justify-content-center ion-padding-vertical">
       <ion-item>
         <ion-label position="floating">Description</ion-label>
-        <ion-input [(ngModel)]="description"></ion-input>
+        <ion-input [(ngModel)]="this.item.description"></ion-input>
       </ion-item>
     </ion-row>
     <ion-row class="ion-justify-content-center ion-padding-vertical">
       <ion-item>
-        <ion-label position="floating">Price ($)</ion-label>
-        <ion-input type="tel" [(ngModel)]="itemPrice"></ion-input>
-      </ion-item>
-    </ion-row>
-    <ion-row class="ion-justify-content-center ion-padding-vertical">
         <ion-label position="floating">Quantity</ion-label>
-        <ion-input disabled="true" inputmode="numeric" [(ngModel)]="itemQuantity"></ion-input>
+        <ion-input disabled="true" inputmode="numeric" [(ngModel)]="this.item.itemQuantity"></ion-input>
+      </ion-item>
     </ion-row>
     <ion-row class="ion-justify-content-center ion-padding-vertical">
       <ion-button (click)="increaseQuantity()">
@@ -50,14 +46,14 @@
       </ion-button>
     </ion-row>
           
-    <ion-row class="ion-justify-content-center ion-padding-vertical">
+    <!-- <ion-row class="ion-justify-content-center ion-padding-vertical">
       <ion-item>
         <ion-label position="fixed">Image</ion-label>
         <input type="file" (change)="uploadPhoto($event)" />
       </ion-item>
-    </ion-row>
+    </ion-row> -->
     <ion-row class="ion-justify-content-center ion-padding-vertical">
-      <ion-button expand="block" size="large" color="warning" (click)="addItem()">Add</ion-button>
+      <ion-button expand="block" size="large" color="warning" (click)="updateItem()">Update</ion-button>
     </ion-row>
   </ion-grid>
 </ion-content>
