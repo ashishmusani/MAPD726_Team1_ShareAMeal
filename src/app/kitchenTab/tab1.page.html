@@ -26,10 +26,12 @@
   </ion-row>
 </ion-content>
 
+<ion-header *ngIf="this.kitchenExists">
+  <ion-button *ngIf="this.kitchenExists" style="font-size: 1rem; margin: 0.5rem" size="large" expand="full" color="warning" (click)="addItemClicked()">
+    Add Item
+  </ion-button>
+</ion-header>
 <ion-content *ngIf="this.kitchenExists" [fullscreen]="true">
-      <ion-button *ngIf="this.kitchenExists" style="font-size: 1rem; margin: 1rem" size="large" expand="full" color="warning" (click)="addItemClicked()">
-        Add Item
-      </ion-button>
     <ion-card *ngFor="let item of this.items">
       <ion-item>
         <img src='../../assets/chef.png' style="width: 5rem; height: 5rem;">
