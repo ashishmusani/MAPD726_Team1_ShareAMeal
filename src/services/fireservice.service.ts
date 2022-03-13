@@ -92,6 +92,10 @@ export class FireserviceService {
     return this.firestore.collection("carts", ref => ref.where("userId", "==", uid)).get();
   }
 
+  getCartByUserIdNKitchenId(uid, kitchenId){
+    return this.firestore.collection("carts", ref => ref.where("userId", "==", uid).where("kitchenId","==",kitchenId)).get();
+  }
+
   getItemsInCart(cartId){
     return this.firestore.collection("carts").doc(cartId).collection("items").get();
   }
