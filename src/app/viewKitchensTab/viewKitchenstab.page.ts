@@ -36,4 +36,11 @@ export class ViewKitchensTabPage implements OnInit {
       event.target.complete();
     })
   }
+
+  viewCart() {
+    this.storageService.get('userId').then(userId => {
+      this.router.navigate(['/view-carts/', userId]);
+    })
+    
+  }
 }
