@@ -23,7 +23,11 @@ const routes: Routes = [
     path: 'items-details/:kitchenId/:itemId',
     component: ItemDetailsComponent
   },
-  { path: '', redirectTo: 'login', pathMatch: 'full' }
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  {
+    path: 'view-carts/:userId',
+    loadChildren: () => import('./view-carts/view-carts.module').then( m => m.ViewCartsPageModule)
+  }
 ];
 @NgModule({
   imports: [
