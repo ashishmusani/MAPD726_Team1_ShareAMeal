@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FireserviceService } from 'src/services/fireservice.service';
+import { Router } from '@angular/router';
+import { StorageService } from 'src/services/storage-service.service';
 
 @Component({
   selector: 'app-items-in-kitchens',
@@ -13,7 +15,8 @@ export class ItemsInKitchensPage implements OnInit {
   kitchenId: String;
 
   constructor(private activatedRoute: ActivatedRoute,
-    private fireService: FireserviceService) { }
+    private fireService: FireserviceService,
+    private router: Router, public storageService: StorageService) { }
 
   ngOnInit() {
     let userId = this.activatedRoute.snapshot.paramMap.get('userId');
@@ -37,4 +40,12 @@ export class ItemsInKitchensPage implements OnInit {
       }
     })
   }
+
+  viewCart() {
+    this.storageService.get('userId').then(userId => {
+      console.log(this.kitchenId)
+      this.router.navigate(['/view-carts/', userId, this.kitchenId]);
+    })
+  }
+  
 }

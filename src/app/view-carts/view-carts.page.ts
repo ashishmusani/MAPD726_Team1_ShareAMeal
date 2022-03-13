@@ -16,7 +16,8 @@ export class ViewCartsPage implements OnInit {
 
   ngOnInit() {
     let userId = this.activatedRoute.snapshot.paramMap.get('userId');
-    this.fireService.getCartByUserId(String(userId)).subscribe(querySnapshot => {
+    let kitchenId = this.activatedRoute.snapshot.paramMap.get('kitchenId');
+    this.fireService.getCartByUserIdNKitchenId(String(userId), String(kitchenId)).subscribe(querySnapshot => {
       if(querySnapshot.size > 0){
         querySnapshot.forEach(doc => {
            // get all items that belonged to kitchen

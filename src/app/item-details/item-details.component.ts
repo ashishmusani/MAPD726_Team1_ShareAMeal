@@ -58,7 +58,8 @@ export class ItemDetailsComponent implements OnInit {
     console.log("userId: ", userId)
 
     let data = {
-      userId: userId
+      userId: userId,
+      kitchenId: this.activatedRoute.snapshot.paramMap.get('kitchenId')
     }
 
     this.fireService.getCartByUserId(String(userId)).subscribe(querySnapshot => {

@@ -25,7 +25,7 @@ const routes: Routes = [
   },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
-    path: 'view-carts/:userId',
+    path: 'view-carts/:userId/:kitchenId',
     loadChildren: () => import('./view-carts/view-carts.module').then( m => m.ViewCartsPageModule)
   }
 ];
