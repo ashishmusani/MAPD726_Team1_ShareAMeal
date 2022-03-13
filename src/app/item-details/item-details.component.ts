@@ -11,7 +11,7 @@ import { ToastController } from '@ionic/angular';
 })
 export class ItemDetailsComponent implements OnInit {
   public currentUserId: String;
-  public itemQuantity: String;
+  public itemQuantity: number = 1;
   private item;
   itemisLoaded: boolean = false;
 
