@@ -87,4 +87,12 @@ export class FireserviceService {
   {
     return this.firestore.collection("kitchens").doc(kitchenId).collection("items").doc(itemId).get();
   }
+
+  getCartByUserId(uid){
+    return this.firestore.collection("carts", ref => ref.where("userId", "==", uid)).get();
+  }
+
+  getItemsInCart(cartId){
+    return this.firestore.collection("carts").doc(cartId).collection("items").get();
+  }
 }

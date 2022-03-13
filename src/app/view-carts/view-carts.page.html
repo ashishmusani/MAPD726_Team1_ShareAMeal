@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>My Cart</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/customer/kitchens"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let item of this.items">
+    <ion-item>
+      <img src="" style="width: 5rem; height: 5rem;">
+      
+      <ion-card-header>
+        <ion-card-title>{{item.itemname}}</ion-card-title>
+        <ion-card-subtitle color="primary">
+          {{item.description}}
+        </ion-card-subtitle>
+        <ion-card-subtitle class="ion-padding-vertical">
+          <ion-label position="fixed" style="font-size: medium;">Qty:</ion-label>
+          <ion-input type="number" value="{{item.qty}}">
+          </ion-input>
+          <ion-button expand="block" size="medium" color="warning">Update</ion-button>
+        </ion-card-subtitle>
+      </ion-card-header>
+    </ion-item>
+  </ion-card>
+</ion-content>
