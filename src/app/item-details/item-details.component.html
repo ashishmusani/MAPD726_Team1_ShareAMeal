@@ -18,7 +18,10 @@
       {{this.item.description}}
     </ion-card-content>
   </ion-card>
-  <ion-button style="font-size: 1rem; margin: 1rem; margin-top: 4rem" size="large" expand="full" color="warning">
+  <ion-input [(ngModel)]="itemQuantity" value="1">Qty:
+  </ion-input>
+  <ion-button style="font-size: 1rem; margin: 1rem; margin-top: 4rem" size="large" expand="full" 
+  color="warning" (click)="addToCart()">
     Add to Cart
   </ion-button>
 </ion-content>

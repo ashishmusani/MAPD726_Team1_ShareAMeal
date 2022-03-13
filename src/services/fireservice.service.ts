@@ -95,4 +95,14 @@ export class FireserviceService {
   getItemsInCart(cartId){
     return this.firestore.collection("carts").doc(cartId).collection("items").get();
   }
+
+  addToCart(userId){
+    return this.firestore.collection("carts").add(userId)
+  }
+
+  addItemsToCart(data, cartId){
+      if(cartId){
+        return this.firestore.collection("carts").doc(cartId).collection("items").add(data)
+      }
+  }
 }
