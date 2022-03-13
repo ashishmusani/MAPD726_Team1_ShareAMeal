@@ -1,0 +1,49 @@
+<ion-header *ngIf="this.itemisLoaded">
+  <ion-toolbar>
+    <ion-title>{{this.item.itemname}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/customer/kitchens/items/shoppingCart"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-card>
+    <img src={{item?.imageURL}}/>
+    <ion-card-header>
+      <ion-card-subtitle>{{kitchenName}}</ion-card-subtitle>
+      <ion-card-title>{{name}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content class="content">  
+      <ion-icon class="ion-icon m-r" name="remove-circle-outline" (click)="decrement()"></ion-icon>
+      {{currentNumber}}
+      <ion-icon class="ion-icon m-l" name="add-circle-outline" (click)="increment()"></ion-icon> 
+    </ion-card-content>
+    <ion-button color="success"><ion-icon name="bag-check-outline"></ion-icon>Checkout</ion-button>
+  </ion-card>
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-icon name="cart-outline" class="shopcart"></ion-icon>
+    <ion-text class="text"><strong>Total:</strong> {{bun}}$</ion-text>
+  </ion-toolbar>
+</ion-footer>
+
+
+
+
+<!-- <ion-content>  
+  <ion-card>  
+    <ion-card-header>  
+      <ion-card-subtitle>Kitchen</ion-card-subtitle>  
+      <ion-card-title>Bun</ion-card-title>  
+      </ion-card-header>  
+    <ion-card-content class="content">  
+      <ion-icon class="ion-icon m-r" name="remove-circle-outline" (click)="decrement()"></ion-icon>
+      {{currentNumber}}
+      <ion-icon class="ion-icon m-l" name="add-circle-outline" (click)="increment()"></ion-icon> 
+    </ion-card-content>
+  </ion-card>  
+</ion-content> -->

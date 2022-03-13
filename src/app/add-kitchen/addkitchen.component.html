@@ -1,0 +1,49 @@
+<ion-content class="ion-justify-content-center" [fullscreen]="true">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-label class="ion-justify-content-center ion-padding-vertical lbl" position="floating" color="warning">
+        KITCHEN
+      </ion-label>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-padding-vertical" style="margin-top: 5vh;">
+      <ion-item>
+        <ion-label position="floating">Kitchen Name</ion-label>
+        <ion-input [(ngModel)]="kitchenName"></ion-input>
+      </ion-item>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-padding-vertical">
+      <ion-item>
+        <ion-label position="floating">Description</ion-label>
+        <ion-input [(ngModel)]="description" ></ion-input>
+      </ion-item>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-padding-vertical">
+      <ion-item>
+        <ion-label position="floating">Cook Name</ion-label>
+        <ion-input [(ngModel)]="cookName" ></ion-input>
+      </ion-item>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-padding-vertical">
+      <ion-item>
+        <ion-label position="floating">Contact No</ion-label>
+        <ion-input [(ngModel)]="contactNo" ></ion-input>
+      </ion-item>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-padding-vertical">
+      <ion-item>
+        <ion-label position="floating">Cuisine</ion-label>
+        <ion-input [(ngModel)]="cuisine" ></ion-input>
+      </ion-item>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-padding-vertical">
+      <ion-item>
+        <ion-label position="fixed">Image</ion-label>
+        <input type="file" (change)="uploadPhoto($event)" />
+      </ion-item>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-padding-vertical">
+      <ion-button expand="block" size="large" color="warning" (click)="addNewKitchen()">Create</ion-button>
+    </ion-row>
+    
+  </ion-grid>
+</ion-content>

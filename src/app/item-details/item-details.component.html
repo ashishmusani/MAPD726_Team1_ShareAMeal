@@ -1,0 +1,25 @@
+<ion-header *ngIf="this.itemisLoaded">
+  <ion-toolbar>
+    <ion-title>{{this.item.itemname}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/customer/kitchens/items"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="this.itemisLoaded">
+  <ion-card style="margin-top: 10rem;">
+    <img src={{this.item.imageURL}} style="min-width: 100%" />
+    <ion-card-header>
+      <ion-card-title>{{this.item.itemname}}</ion-card-title>
+      <ion-card-subtitle>{{this.item.ingredients}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      {{this.item.description}}
+    </ion-card-content>
+  </ion-card>
+  <ion-button style="font-size: 1rem; margin: 1rem; margin-top: 4rem" 
+  size="large" expand="full" color="warning" [routerLink]="['/','shoppingCart', item.kitchenId, item.itemId]">
+    Add to Cart
+  </ion-button>
+</ion-content>
