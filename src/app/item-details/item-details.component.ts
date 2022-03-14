@@ -14,6 +14,7 @@ export class ItemDetailsComponent implements OnInit {
   public itemQuantity: number = 1;
   private item;
   itemisLoaded: boolean = false;
+  private kitchenId: String;
 
   constructor(private activatedRoute: ActivatedRoute, private fireService: FireserviceService,
     public storageService: StorageService, public toastController: ToastController) { 
@@ -23,13 +24,13 @@ export class ItemDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    let kitchenId = this.activatedRoute.snapshot.paramMap.get('kitchenId')
+    this.kitchenId = this.activatedRoute.snapshot.paramMap.get('kitchenId')
     let itemId = this.activatedRoute.snapshot.paramMap.get('itemId');
-    console.log(kitchenId, itemId)
+    console.log(this.kitchenId, itemId)
     // let kitchenId = this.activatedRoute.snapshot.paramMap.get('kitchenId')
     // let itemId = this.activatedRoute.snapshot.paramMap.get('itemId');
     // console.log(kitchenId, itemId)
-    this.fireService.getItem(kitchenId, itemId).subscribe(doc => {
+    this.fireService.getItem(this.kitchenId, itemId).subscribe(doc => {
       this.item = doc.data()
       this.itemisLoaded = true;
       console.log(doc.data())
@@ -62,7 +63,7 @@ export class ItemDetailsComponent implements OnInit {
       kitchenId: this.activatedRoute.snapshot.paramMap.get('kitchenId')
     }
 
-    this.fireService.getCartByUserId(String(userId)).subscribe(querySnapshot => {
+    this.fireService.getCartByUserIdNKitchenId(this.currentUserId, this.kitchenId).subscribe(querySnapshot => {
       if(querySnapshot.size > 0){
         querySnapshot.forEach(doc => {
           // 1. already exist cart
@@ -74,14 +75,14 @@ export class ItemDetailsComponent implements OnInit {
             }
             this.fireService.addItemsToCart(data, doc.id).then(ref => {
              
-              }, err => {
-                alert(err);
-              })
+            }, err => {
+              alert(err);
+            })
           }
         })
       } else {
         // 2. create new cart
-        this.fireService.addToCart(data).then(ref => {
+        this.fireService.createNewCart(data).then(ref => {
           // add items into cart
           let data = {
             kitchenId: this.activatedRoute.snapshot.paramMap.get('kitchenId'),

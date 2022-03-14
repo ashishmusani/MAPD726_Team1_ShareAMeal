@@ -100,8 +100,8 @@ export class FireserviceService {
     return this.firestore.collection("carts").doc(cartId).collection("items").get();
   }
 
-  addToCart(userId){
-    return this.firestore.collection("carts").add(userId)
+  createNewCart(data){
+    return this.firestore.collection("carts").add(data);
   }
 
   addItemsToCart(data, cartId){
