@@ -1,8 +1,8 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>My Cart</ion-title>
+    <ion-title>Checkout</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/customer/kitchens"></ion-back-button>
+      <ion-back-button defaultHref="/view-carts"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -18,10 +18,7 @@
           {{item.description}}
         </ion-card-subtitle>
         <ion-card-subtitle class="ion-padding-vertical">
-          <ion-label position="fixed" style="font-size: medium;">Qty:</ion-label>
-          <ion-input type="number" value="{{item.qty}}">
-          </ion-input>
-          <ion-button expand="block" size="medium" color="warning">Update</ion-button>
+          <ion-label position="fixed" style="font-size: medium;">{{item.qty}}</ion-label>
         </ion-card-subtitle>
       </ion-card-header>
     </ion-item>
@@ -30,7 +27,7 @@
   <ion-label *ngIf="this.items.length == 0" style="font-size: larger; margin: 20%;">You have no items in cart.</ion-label>
 
   <ion-row class="ion-justify-content-center ion-padding-vertical">
-    <ion-button expand="block" size="large" color="warning" (click)="checkout()">Checkout</ion-button>
+    <ion-button expand="block" size="large" color="warning">ORDER</ion-button>
   </ion-row>
   
 </ion-content>

@@ -1,24 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FireserviceService } from 'src/services/fireservice.service';
-import { Router } from '@angular/router';
-import { StorageService } from 'src/services/storage-service.service';
 
 @Component({
-  selector: 'app-view-carts',
-  templateUrl: './view-carts.page.html',
-  styleUrls: ['./view-carts.page.scss'],
+  selector: 'app-checkout',
+  templateUrl: './checkout.component.html',
+  styleUrls: ['./checkout.component.scss'],
 })
-export class ViewCartsPage implements OnInit {
+export class CheckoutComponent implements OnInit {
 
   private items = [];
 
   constructor(private activatedRoute: ActivatedRoute,
-    private fireService: FireserviceService, private storageService: StorageService, private router: Router) { }
+    private fireService: FireserviceService) { }
 
-  ngOnInit() {
+    ngOnInit() {
     let userId = this.activatedRoute.snapshot.paramMap.get('userId');
     let kitchenId = this.activatedRoute.snapshot.paramMap.get('kitchenId');
+    console.log(userId);
+    console.log(kitchenId);
     this.fireService.getCartByUserIdNKitchenId(String(userId), String(kitchenId)).subscribe(querySnapshot => {
       if(querySnapshot.size > 0){
         querySnapshot.forEach(doc => {
@@ -37,12 +37,6 @@ export class ViewCartsPage implements OnInit {
         })
       }
       console.log(this.items)
-    })
-  }
-
-  checkout() {
-    this.storageService.get('userId').then(userId => {
-      this.router.navigate(['/checkout/', userId, this.activatedRoute.snapshot.paramMap.get('kitchenId')]);
     })
   }
 
