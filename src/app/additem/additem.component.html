@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/customer/kitchens"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-justify-content-center" [fullscreen]="true">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-label class="ion-justify-content-center ion-padding-vertical lbl" position="floating" color="warning">
+        ITEM
+      </ion-label>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-padding-vertical" style="margin-top: 15vh;">
+      <ion-item>
+        <ion-label position="floating">Item Name</ion-label>
+        <ion-input [(ngModel)]="itemname"></ion-input>
+      </ion-item>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-padding-vertical">
+      <ion-item>
+        <ion-label position="floating">Ingredients</ion-label>
+        <ion-input [(ngModel)]="ingredients"></ion-input>
+      </ion-item>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-padding-vertical">
+      <ion-item>
+        <ion-label position="floating">Description</ion-label>
+        <ion-input [(ngModel)]="description"></ion-input>
+      </ion-item>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-padding-vertical">
+      <ion-item>
+        <ion-label position="fixed">Image</ion-label>
+        <input type="file" (change)="uploadPhoto($event)" />
+      </ion-item>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-padding-vertical">
+      <ion-button expand="block" size="large" color="warning" (click)="addItem()">Add</ion-button>
+    </ion-row>
+  </ion-grid>
+</ion-content>

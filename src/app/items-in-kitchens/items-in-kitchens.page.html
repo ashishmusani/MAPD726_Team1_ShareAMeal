@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{this.kitchenName}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/customer/kitchens"></ion-back-button>
+    </ion-buttons>
+    <ion-button slot="end" (click)="viewCart()">
+      <ion-icon name="cart-outline" size="large"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let item of this.items" [routerLink]="['/','items-details', this.kitchenId, item.itemId]">
+    <ion-item>
+      <img src={{item.imageURL}} style="width: 5rem; height: 5rem;">
+      
+      <ion-card-header>
+        <ion-card-title>{{item.itemname}}</ion-card-title>
+        <ion-card-subtitle color="primary">
+          {{item.description}}
+        </ion-card-subtitle>
+        <ion-card-subtitle color="secondary"><em>{{item.ingredients}}</em></ion-card-subtitle>
+      </ion-card-header>
+    </ion-item>
+  </ion-card>
+</ion-content>

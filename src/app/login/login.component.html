@@ -1,0 +1,25 @@
+<ion-content class="ion-justify-content-center" [fullscreen]="true">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center"  style="margin-top: 20vh;">
+      <img src="../../assets/logo.png" class="logoImage">
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-padding-vertical" style="margin-top: 5vh;">
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input [(ngModel)]="email"></ion-input>
+      </ion-item>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-padding-vertical">
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input [(ngModel)]="password" type="password"></ion-input>
+      </ion-item>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-padding-vertical">
+      <ion-button expand="block" size="large" color="medium" (click)="login()">Login</ion-button>
+    </ion-row>
+    <ion-row class="ion-justify-content-center" style="margin-top: 10vh;">
+      <ion-button [routerLink]="['/signup']" expand="block" size="large" color="medium">Sign Up</ion-button>
+    </ion-row>
+  </ion-grid>
+</ion-content>

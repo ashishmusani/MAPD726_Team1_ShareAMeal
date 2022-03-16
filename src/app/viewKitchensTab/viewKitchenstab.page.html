@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Kitchens
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="loadKitchensList($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Pull to refresh"
+      refreshingSpinner="lines"
+      refreshingText="Reloading kitchens">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-card *ngFor="let kitchen of this.kitchens; index as i;" [routerLink]="['/','items-in-kitchens', kitchen.userId]">
+    <ion-item *ngIf="kitchen.kitchenIsOpen">
+      <img src={{kitchen.imageURL}} style="width: 5rem; height: 5rem">
+      <ion-label slot="end">
+        {{kitchen.averageRating}}
+        <ion-icon name="star"></ion-icon>       
+      </ion-label>
+      <ion-card-header>
+        <ion-card-title>{{kitchen.kitchenName}}</ion-card-title>
+        <ion-card-subtitle color="primary">
+          <img src="../../assets/chef.png" style="width: 0.8rem;">
+          {{kitchen.cookName}}
+        </ion-card-subtitle>
+        <ion-card-subtitle color="secondary"><em>{{kitchen.cuisine}}</em></ion-card-subtitle>
+        </ion-card-header>
+    </ion-item>
+  </ion-card>
+</ion-content>
