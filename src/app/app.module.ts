@@ -20,6 +20,7 @@ import { ViewKitchensTabPage } from './viewKitchensTab/viewKitchenstab.page';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { ItemDetailsComponent } from './item-details/item-details.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { ViewOrdersComponent } from './view-orders/view-orders.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { CheckoutComponent } from './checkout/checkout.component';
     AddItemComponent,
     ViewKitchensTabPage,
     ItemDetailsComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    ViewOrdersComponent
   ],
   entryComponents: [
     LoginComponent

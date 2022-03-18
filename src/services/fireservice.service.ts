@@ -109,4 +109,10 @@ export class FireserviceService {
         return this.firestore.collection("carts").doc(cartId).collection("items").add(data)
       }
   }
+
+  getOrdersForCustomer(customerId){
+    if(customerId){
+      return this.firestore.collection("orders", ref => ref.where("customerId", "==", customerId)).get();
+    }
+  }
 }

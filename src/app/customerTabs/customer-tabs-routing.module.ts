@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SettingsComponent } from '../settings/settings.component';
+import { ViewOrdersComponent } from '../view-orders/view-orders.component';
 import { CustomerTabsPage } from './customer-tabs.page';
 
 const routes: Routes = [
@@ -13,8 +14,8 @@ const routes: Routes = [
         loadChildren: () => import('../viewKitchensTab/viewKitchenstab.module').then(m => m.viewKitchensTabPageModule)
       },
       {
-        path: 'profile',
-        loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+        path: 'orders',
+        component: ViewOrdersComponent
       },
       {
         path: 'settings',
