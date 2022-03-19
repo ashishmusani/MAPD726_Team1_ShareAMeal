@@ -115,4 +115,8 @@ export class FireserviceService {
       return this.firestore.collection("orders", ref => ref.where("customerId", "==", customerId)).get();
     }
   }
+
+  updateQtyInCart(item, qty){
+    return this.firestore.collection("carts").doc(item.cartId).collection("items").doc(item.itemId).update({itemQuantity: qty})
+  }
 }
