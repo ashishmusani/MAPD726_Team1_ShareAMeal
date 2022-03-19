@@ -23,7 +23,7 @@ export class AddkitchenComponent implements OnInit {
   errorMessage = '';
   public imageURL: string;
 
-  constructor(public router: Router, public fireService: FireserviceService, 
+  constructor(public router: Router, public fireService: FireserviceService,
               public toastController: ToastController, public auth: AngularFireAuth,
               public storageService: StorageService,
               public angularFireStorageModule: AngularFireStorage) {
@@ -37,6 +37,7 @@ export class AddkitchenComponent implements OnInit {
   addNewKitchen() {
     let userId = this.currentUserId || 'dummyId'; //should get current user id
     console.log("userId: ", userId)
+    console.log("imageURL:", this.imageURL)
     let data = {
       kitchenName: this.kitchenName,
       description: this.description,
@@ -69,7 +70,7 @@ export class AddkitchenComponent implements OnInit {
         if (res) {
           console.log(res);
           this.imageURL = res;
-        } 
+        }
       },
       (error: any) => {
         this.errorMessage = 'File size exceeded. Maximum file size 1 MB'

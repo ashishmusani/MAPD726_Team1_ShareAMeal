@@ -3,7 +3,6 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { ItemDetailsComponent } from './item-details/item-details.component'
-import { CheckoutComponent } from './checkout/checkout.component'
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -28,10 +27,6 @@ const routes: Routes = [
   {
     path: 'view-carts/:userId/:kitchenId',
     loadChildren: () => import('./view-carts/view-carts.module').then( m => m.ViewCartsPageModule)
-  },
-  {
-    path: 'checkout/:userId/:kitchenId',
-    component: CheckoutComponent
   }
 ];
 @NgModule({

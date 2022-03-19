@@ -1,18 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
 import { ViewCartsPageRoutingModule } from './view-carts-routing.module';
 
 import { ViewCartsPage } from './view-carts.page';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
     IonicModule,
+    FormsModule,
+    ReactiveFormsModule,
     ViewCartsPageRoutingModule
   ],
   declarations: [ViewCartsPage]

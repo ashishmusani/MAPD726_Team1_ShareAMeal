@@ -5,13 +5,13 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: "AIzaSyBaF2rdYi3tluSnBDJfcToKWPIU1Nu7Ml4",
-    authDomain: "shareameal-37b75.firebaseapp.com",
-    projectId: "shareameal-37b75",
-    storageBucket: "shareameal-37b75.appspot.com",
-    messagingSenderId: "194175089302",
-    appId: "1:194175089302:web:0fbe5358f2f705f8aae0b7",
-    measurementId: "G-KMW4TRWV1M"
+    apiKey: 'AIzaSyBaF2rdYi3tluSnBDJfcToKWPIU1Nu7Ml4',
+    authDomain: 'shareameal-37b75.firebaseapp.com',
+    projectId: 'shareameal-37b75',
+    storageBucket: 'shareameal-37b75.appspot.com',
+    messagingSenderId: '194175089302',
+    appId: '1:194175089302:web:0fbe5358f2f705f8aae0b7',
+    measurementId: 'G-KMW4TRWV1M'
   }
 };
 

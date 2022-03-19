@@ -3,11 +3,12 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { StorageService } from './storage-service.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+// import {doc, deleteDoc} from '@firestore/firestore';
 @Injectable({
   providedIn: 'root'
 })
 export class FireserviceService {
-  private locationUpload = "uploads/";
+  private locationUpload = 'uploads/';
   constructor(public firestore: AngularFirestore, public auth: AngularFireAuth, public storageService: StorageService,
     public angularFireStorage: AngularFireStorage) {
   }
@@ -21,32 +22,32 @@ export class FireserviceService {
   }
 
   saveDetails(data) {
-    return this.firestore.collection("users").doc(data.uid).set(data)
+    return this.firestore.collection('users').doc(data.uid).set(data);
   }
 
   getDetails(data){
-    return this.firestore.collection("users").doc(data.uid).get();
+    return this.firestore.collection('users').doc(data.uid).get();
   }
 
   addNewKitchen(data) {
-    return this.firestore.collection("kitchens").add(data)
+    return this.firestore.collection('kitchens').add(data);
   }
-  
+
   getKitchens(){
-    return this.firestore.collection("kitchens").get();
+    return this.firestore.collection('kitchens').get();
   }
 
   addItem(data){
     return this.storageService.get('kitchenId').then(id => {
-      console.log("kitchen id in add item call: ", id)
+      console.log('kitchen id in add item call: ', id);
       if(id){
-        return this.firestore.collection("kitchens").doc(id).collection("items").add(data)
+        return this.firestore.collection('kitchens').doc(id).collection('items').add(data);
       }
-    })
+    });
   }
 
   getKitchenByUserId(uid){
-    return this.firestore.collection("kitchens", ref => ref.where("userId", "==", uid)).get();
+    return this.firestore.collection('kitchens', ref => ref.where('userId', '==', uid)).get();
   }
 
   getCurrentUser(){
@@ -59,7 +60,7 @@ export class FireserviceService {
         const pictureRef = this.angularFireStorage.ref(this.locationUpload + imageName);
         pictureRef
           .put(imageData)
-          .then(function () {
+          .then(function() {
             pictureRef.getDownloadURL().subscribe((url: any) => {
               resolve(url);
             });
@@ -72,47 +73,50 @@ export class FireserviceService {
   }
 
   getKitchen(id){
-    return this.firestore.collection("kitchens").doc(id).get()
+    return this.firestore.collection('kitchens').doc(id).get();
   }
 
   changeKitchenStatus(id: String, isOpen: boolean){
-    return this.firestore.collection("kitchens").doc(id.toString()).update({kitchenIsOpen: isOpen})
+    return this.firestore.collection('kitchens').doc(id.toString()).update({kitchenIsOpen: isOpen});
   }
 
   getItemsInKitchen(kitchenId){
-    return this.firestore.collection("kitchens").doc(kitchenId).collection("items").get();
+    return this.firestore.collection('kitchens').doc(kitchenId).collection('items').get();
   }
 
   getItem(kitchenId,itemId)
   {
-    return this.firestore.collection("kitchens").doc(kitchenId).collection("items").doc(itemId).get();
+    return this.firestore.collection('kitchens').doc(kitchenId).collection('items').doc(itemId).get();
   }
 
   getCartByUserId(uid){
-    return this.firestore.collection("carts", ref => ref.where("userId", "==", uid)).get();
+    return this.firestore.collection('carts', ref => ref.where('userId', '==', uid)).get();
   }
 
   getCartByUserIdNKitchenId(uid, kitchenId){
-    return this.firestore.collection("carts", ref => ref.where("userId", "==", uid).where("kitchenId","==",kitchenId)).get();
+    return this.firestore.collection('carts', ref => ref.where('userId', '==', uid).where('kitchenId','==',kitchenId)).get();
   }
 
   getItemsInCart(cartId){
-    return this.firestore.collection("carts").doc(cartId).collection("items").get();
+    return this.firestore.collection('carts').doc(cartId).collection('items').get();
   }
 
-  createNewCart(data){
-    return this.firestore.collection("carts").add(data);
+  addToCart(userId){
+    return this.firestore.collection('carts').add(userId);
   }
 
   addItemsToCart(data, cartId){
+    console.log('CartId', cartId);
+
       if(cartId){
-        return this.firestore.collection("carts").doc(cartId).collection("items").add(data)
+        return this.firestore.collection('carts').doc(cartId).collection('items').add(data);
       }
   }
+  updateCartItem(data, cartId){
+    return this.firestore.collection('carts').doc(cartId).collection('items').doc(data.cartItemId).update(data);
+  }
 
-  getOrdersForCustomer(customerId){
-    if(customerId){
-      return this.firestore.collection("orders", ref => ref.where("customerId", "==", customerId)).get();
-    }
+  removeItemsfromCart(data, cartId){
+    return this.firestore.collection('carts').doc(cartId).collection('items').doc(data.cartItemId).delete();
   }
 }

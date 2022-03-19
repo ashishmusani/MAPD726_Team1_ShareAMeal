@@ -20,7 +20,6 @@ export class AddItemComponent implements OnInit {
   public description: string;
   public currentKitchenId: String;
   public imageURL: string;
-  public itemPrice: Number;
   errorMessage = '';
 
   constructor(private router: Router, public fireService: FireserviceService, private _location: Location, public toastController: ToastController, public auth: AngularFireAuth,
@@ -46,7 +45,6 @@ export class AddItemComponent implements OnInit {
       ingredients: this.ingredients,
       kitchenId: this.currentKitchenId,
       imageURL: this.imageURL,
-      price: this.itemPrice
     }
     this.fireService.addItem(data).then(ref => {
       this.storageService.set('itemId', ref.id);

@@ -11,30 +11,29 @@ import { ToastController } from '@ionic/angular';
 })
 export class ItemDetailsComponent implements OnInit {
   public currentUserId: String;
-  public itemQuantity: number = 1;
+  public itemQuantity = 1;
   private item;
-  itemisLoaded: boolean = false;
-  private kitchenId: String;
+  itemisLoaded = false;
 
   constructor(private activatedRoute: ActivatedRoute, private fireService: FireserviceService,
-    public storageService: StorageService, public toastController: ToastController) { 
+    public storageService: StorageService, public toastController: ToastController) {
     this.storageService.get('userId').then(userId => {
-      this.currentUserId = userId
-    })
+      this.currentUserId = userId;
+    });
   }
 
   ngOnInit() {
-    this.kitchenId = this.activatedRoute.snapshot.paramMap.get('kitchenId')
-    let itemId = this.activatedRoute.snapshot.paramMap.get('itemId');
-    console.log(this.kitchenId, itemId)
+    const kitchenId = this.activatedRoute.snapshot.paramMap.get('kitchenId');
+    const itemId = this.activatedRoute.snapshot.paramMap.get('itemId');
+    console.log(kitchenId, itemId);
     // let kitchenId = this.activatedRoute.snapshot.paramMap.get('kitchenId')
     // let itemId = this.activatedRoute.snapshot.paramMap.get('itemId');
     // console.log(kitchenId, itemId)
-    this.fireService.getItem(this.kitchenId, itemId).subscribe(doc => {
-      this.item = doc.data()
+    this.fireService.getItem(kitchenId, itemId).subscribe(doc => {
+      this.item = doc.data();
       this.itemisLoaded = true;
-      console.log(doc.data())
-    })
+      console.log(doc.data());
+    });
   }
 
   addToCart() {
@@ -45,7 +44,7 @@ export class ItemDetailsComponent implements OnInit {
     //   kitchenId: this.currentKitchenId,
     //   imageURL: this.imageURL,
     // }
-    
+
     // this.fireService.addItem(data).then(ref => {
     //   this.storageService.set('itemId', ref.id);
     //   this.router.navigate(['/cook/kitchen']);
@@ -55,60 +54,63 @@ export class ItemDetailsComponent implements OnInit {
     //   })
     // }
 
-    let userId = this.currentUserId || 'dummyId'; //should get current user id
-    console.log("userId: ", userId)
+    const userId = this.currentUserId || 'dummyId'; //should get current user id
+    console.log('userId: ', userId);
 
-    let data = {
-      userId: userId,
+    const data = {
+      userId,
       kitchenId: this.activatedRoute.snapshot.paramMap.get('kitchenId')
-    }
+    };
 
-    this.fireService.getCartByUserIdNKitchenId(this.currentUserId, this.kitchenId).subscribe(querySnapshot => {
+    this.fireService.getCartByUserId(String(userId)).subscribe(querySnapshot => {
       if(querySnapshot.size > 0){
         querySnapshot.forEach(doc => {
           // 1. already exist cart
           if(doc.id) {
-            let data = {
+            const data = {
               kitchenId: this.activatedRoute.snapshot.paramMap.get('kitchenId'),
               itemId: this.activatedRoute.snapshot.paramMap.get('itemId'),
               itemQuantity: this.itemQuantity
-            }
+            };
+            localStorage.setItem('cartId', doc.id);
             this.fireService.addItemsToCart(data, doc.id).then(ref => {
-             
-            }, err => {
-              alert(err);
-            })
+
+              }, err => {
+                alert(err);
+              });
           }
-        })
+        });
       } else {
         // 2. create new cart
-        this.fireService.createNewCart(data).then(ref => {
+        this.fireService.addToCart(data).then(ref => {
           // add items into cart
-          let data = {
+          const data = {
             kitchenId: this.activatedRoute.snapshot.paramMap.get('kitchenId'),
             itemId: this.activatedRoute.snapshot.paramMap.get('itemId'),
             itemQuantity: this.itemQuantity
-          }
+          };
+          localStorage.setItem('cartId', ref.id);
           this.fireService.addItemsToCart(data, ref.id).then(ref => {
-           
+
             }, err => {
               alert(err);
-            })
+            });
         }, err => {
           alert(err);
-        })
+        });
       }
       // notification
-      this.presentToast()
-    })
+      this.presentToast();
+    });
   }
 
   async presentToast() {
     const toast = await this.toastController.create({
       message: 'Add item to cart successfully',
-      duration: 2000
+      duration: 2000,
+      color: 'success'
     });
     toast.present();
   }
-  
+
 }
