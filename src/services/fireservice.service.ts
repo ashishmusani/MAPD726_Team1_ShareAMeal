@@ -119,4 +119,8 @@ export class FireserviceService {
   updateQtyInCart(item, qty){
     return this.firestore.collection("carts").doc(item.cartId).collection("items").doc(item.itemId).update({itemQuantity: qty})
   }
+
+  createOrder(orderData){
+    return this.firestore.collection("orders").add(orderData);
+  }
 }

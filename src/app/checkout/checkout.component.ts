@@ -12,6 +12,10 @@ export class CheckoutComponent implements OnInit {
   private items = [];
   private totalprice= 0;
 
+  public deliveryOptionToggle : boolean = false;
+  public deliveryAddress: string;
+  public deliveryApartmentNumber: string
+
   constructor(private activatedRoute: ActivatedRoute,
     private fireService: FireserviceService) { }
 
@@ -44,4 +48,29 @@ export class CheckoutComponent implements OnInit {
     })
   }
 
+  toggle() {
+    this.deliveryOptionToggle = !this.deliveryOptionToggle;
+  }
+
+  createOrder(){
+    //debugger
+    let newItem =[]
+    this.items.map(item => {
+      item.kitchenId && delete item['kitchenId']
+      delete item['imageURL']
+      delete item['description']
+      newItem= [...newItem,item]
+  })
+  
+    let orderData = {
+        customerId: this.activatedRoute.snapshot.paramMap.get('userId'),
+        kitchenId: this.activatedRoute.snapshot.paramMap.get('kitchenId'),
+        items: newItem,
+        totalPrice: this.totalprice,
+        deliveryType: this.deliveryOptionToggle == false ? "Pickup" : `${this.deliveryApartmentNumber}, ${this.deliveryAddress}`
+      }
+  this.fireService.createOrder(orderData);
+
+  //Re-route to somewhere else after this.
+  }
 }
