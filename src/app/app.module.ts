@@ -21,6 +21,7 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { ItemDetailsComponent } from './item-details/item-details.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ViewOrdersComponent } from './view-orders/view-orders.component';
+import { UpdateItemComponent } from './update-item/update-item.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ViewOrdersComponent } from './view-orders/view-orders.component';
     ViewKitchensTabPage,
     ItemDetailsComponent,
     CheckoutComponent,
-    ViewOrdersComponent
+    ViewOrdersComponent,
+    UpdateItemComponent
   ],
   entryComponents: [
     LoginComponent

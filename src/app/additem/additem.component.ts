@@ -19,6 +19,7 @@ export class AddItemComponent implements OnInit {
   public ingredients: String;
   public description: string;
   public currentKitchenId: String;
+  public itemQuantity: number = 1;
   public imageURL: string;
   public itemPrice: Number;
   errorMessage = '';
@@ -45,6 +46,7 @@ export class AddItemComponent implements OnInit {
       description: this.description,
       ingredients: this.ingredients,
       kitchenId: this.currentKitchenId,
+      itemQuantity: this.itemQuantity,
       imageURL: this.imageURL,
       price: this.itemPrice
     }
@@ -77,6 +79,16 @@ export class AddItemComponent implements OnInit {
           this.errorMessage = 'File size exceeded. Maximum file size 1 MB'
         }
       );
+    }
+
+    increaseQuantity(){
+      this.itemQuantity+= 1
+    }
+
+    decreaseQuantity(){
+      if(this.itemQuantity>0){
+        this.itemQuantity-=1
+      }
     }
 
 }
