@@ -7,12 +7,14 @@ import { IonicModule } from '@ionic/angular';
 import { ViewCartsPageRoutingModule } from './view-carts-routing.module';
 
 import { ViewCartsPage } from './view-carts.page';
+import { ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    ReactiveFormsModule,
     ViewCartsPageRoutingModule
   ],
   declarations: [ViewCartsPage]

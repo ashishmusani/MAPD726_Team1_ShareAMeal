@@ -22,13 +22,13 @@
           <ion-input value="{{item.qty}}" (ionChange)="qtyChanged($event)">
           </ion-input>
           <ion-button size="small" color="warning" (click)="updateQty(item)">Update</ion-button>
-          <ion-button size="small" color="danger">Remove</ion-button>
+          <ion-button size="small" color="danger" (click) ="removeItem(item)">Remove</ion-button>
         </ion-card-subtitle>
       </ion-card-header>
     </ion-item>
   </ion-card>
  
-  <ion-label *ngIf="this.items.length == 0" style="font-size: larger; margin: 20%;">You have no items in cart.</ion-label>
+  <ion-label *ngIf="items.length === 0" style="font-size: larger; margin: 20%;">You have no items in cart.</ion-label>
 
   <ion-row class="ion-justify-content-center ion-padding-vertical">
     <ion-button expand="block" size="large" color="warning" (click)="checkout()">Checkout</ion-button>

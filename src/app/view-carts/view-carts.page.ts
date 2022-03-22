@@ -12,7 +12,8 @@ import { AlertService } from 'src/services/alert-service.service';
 })
 export class ViewCartsPage implements OnInit {
 
-  private items = [];
+  items = [];
+  quantity = '';
   public qty: number;
 
   constructor(private activatedRoute: ActivatedRoute,
@@ -61,5 +62,22 @@ export class ViewCartsPage implements OnInit {
   qtyChanged($event){
     this.qty = $event.target.value;
   }
+
+  removeItem(item) {
+    const index = this.items.indexOf(item);
+    if (index > -1) {
+      this.items.splice(index, 1);
+    }
+
+    //const cartId = localStorage.getItem('cartId');
+     //this.fireService.removeItemsfromCart(item, cartId).then(querySnapshot => {
+      this.fireService.removeItemsfromCart(item).then(querySnapshot => {
+       //this.presentToast('Cart item removed successfully!');
+     }, error=> {
+       console.log(error);
+     });
+  }
+
+
 
 }

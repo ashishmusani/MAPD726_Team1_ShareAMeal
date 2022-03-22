@@ -127,4 +127,8 @@ export class FireserviceService {
   updateItem(kitchenId, itemId, data){
     return this.firestore.collection("kitchens").doc(kitchenId).collection("items").doc(itemId).update(data);
   }
+
+  removeItemsfromCart(data){
+    return this.firestore.collection('carts').doc(data.cartId).collection('items').doc(data.itemId).delete();
+  }
 }
