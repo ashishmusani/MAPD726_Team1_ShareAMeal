@@ -70,7 +70,8 @@ export class CheckoutComponent implements OnInit {
         kitchenId: this.activatedRoute.snapshot.paramMap.get('kitchenId'),
         items: newItem,
         totalPrice: this.totalprice,
-        deliveryType: this.deliveryOptionToggle == false ? "Pickup" : `${this.deliveryApartmentNumber}, ${this.deliveryAddress}`
+        deliveryType: this.deliveryOptionToggle == false ? "Pickup" : `${this.deliveryApartmentNumber}, ${this.deliveryAddress}`,
+        status: 'Open'
       }
     this.fireService.createOrder(orderData).then(res => {
       this.storageService.get('cartId').then( cartId => {

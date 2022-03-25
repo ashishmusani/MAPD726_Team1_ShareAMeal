@@ -44,7 +44,8 @@ export class AddkitchenComponent implements OnInit {
       contactNo: this.contactNo,
       userId: this.currentUserId,
       cuisine: this.cuisine,
-      imageURL: this.imageURL
+      imageURL: this.imageURL,
+      kitchenIsOpen: true
     }
     this.fireService.addNewKitchen(data).then(ref => {
       this.storageService.set('kitchenId', ref.id);
