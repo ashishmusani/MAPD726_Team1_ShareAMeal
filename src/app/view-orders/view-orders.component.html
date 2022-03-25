@@ -24,7 +24,7 @@
   </ion-card>
 </ion-content>
 
-<ion-content *ngIf="this.userType === 'cook'">
+<ion-content *ngIf="this.userType === 'cook' || this.userType === 'deliveryAgent'">
   <ion-card *ngFor="let order of this.orders">
       <ion-card-header>
         <ion-card-title>{{order.customerName}}</ion-card-title>

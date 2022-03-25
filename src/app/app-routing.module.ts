@@ -38,7 +38,11 @@ const routes: Routes = [
     path: 'update-item/:kitchenId/:itemId',
     component: UpdateItemComponent
   },
-  { path: '', redirectTo: 'login', pathMatch: 'full' }
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  {
+    path: 'deliveryagent',
+    loadChildren: () => import('./deliveryagent-tabs/deliveryagent-tabs.module').then( m => m.DeliveryagentTabsPageModule)
+  }
 ];
 @NgModule({
   imports: [

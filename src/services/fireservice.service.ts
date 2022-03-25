@@ -141,4 +141,8 @@ export class FireserviceService {
       return this.firestore.collection("orders", ref => ref.where("kitchenId", "==", kitchenId)).get();
     }
   }
+
+  getOrdersForDeliveryAgent(){
+    return this.firestore.collection("orders", ref => ref.where("deliveryType", "!=", "Pickup")).get();
+  }
 }

@@ -33,6 +33,8 @@ export class LoginComponent implements OnInit {
               this.router.navigate(['/cook'])
             else if (currentUser['userType'] === 'customer')
               this.router.navigate(['/customer/kitchens'])
+            else if (currentUser['userType'] === 'deliveryAgent')
+              this.router.navigate(['/deliveryagent'])
           }
         })
       }

@@ -65,7 +65,22 @@ export class ViewOrdersComponent implements OnInit {
           }
         })
       } else {
-
+        // delivery agent
+        this.fireService.getOrdersForDeliveryAgent().subscribe(querySnapshot => {
+          if(querySnapshot.size>0){
+            querySnapshot.forEach(doc => {
+              ordersDocs.push(doc.data())
+            })
+            ordersDocs.forEach(order => {
+              let customerName;
+              this.fireService.getDetails({uid: order.customerId}).subscribe(doc => {
+                let customer: any = doc.data()
+                customerName = customer.name
+                this.orders.push({customerName, status: order.status, totalPrice: order.totalPrice, deliveryType: order.deliveryType})
+              })
+            })
+          }
+        })
       }
     })
   }
