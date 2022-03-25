@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FireserviceService } from 'src/services/fireservice.service';
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { StorageService } from 'src/services/storage-service.service';
 
 @Component({
   selector: 'app-checkout',
@@ -19,7 +20,7 @@ export class CheckoutComponent implements OnInit {
   public deliveryApartmentNumber: string
 
   constructor(private activatedRoute: ActivatedRoute, private fireService: FireserviceService,
-    public toastController: ToastController, public router: Router) { }
+    public toastController: ToastController, public router: Router, private storageService: StorageService) { }
 
     ngOnInit() {
     let userId = this.activatedRoute.snapshot.paramMap.get('userId');
@@ -71,16 +72,22 @@ export class CheckoutComponent implements OnInit {
         totalPrice: this.totalprice,
         deliveryType: this.deliveryOptionToggle == false ? "Pickup" : `${this.deliveryApartmentNumber}, ${this.deliveryAddress}`
       }
-  this.fireService.createOrder(orderData);
-
-  this.presentToast()
-  this.router.navigate(['/customer/kitchens'])
-  //Re-route to somewhere else after this.
+    this.fireService.createOrder(orderData).then(res => {
+      this.storageService.get('cartId').then( cartId => {
+        if(cartId){
+          this.fireService.deleteCart(cartId)
+        }
+        this.presentToast("Order placed successfully!")
+        this.router.navigate(['/customer/kitchens'])
+      })
+    }, err => {
+      this.presentToast("Oops! There was a problem while placing order")
+    });
   }
 
-  async presentToast() {
+  async presentToast(msg) {
     const toast = await this.toastController.create({
-      message: 'Order placed successfully!',
+      message: msg,
       duration: 2000
     });
     toast.present();

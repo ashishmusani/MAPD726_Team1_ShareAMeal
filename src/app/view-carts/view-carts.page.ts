@@ -30,6 +30,7 @@ export class ViewCartsPage implements OnInit {
            // get all items that belonged to kitchen
            this.items = []
            cartId = doc.id
+           this.storageService.set('cartId', cartId);
            this.fireService.getItemsInCart(doc.id).subscribe(querySnapshot => {
             if(querySnapshot.size > 0){
               querySnapshot.forEach(doc => {

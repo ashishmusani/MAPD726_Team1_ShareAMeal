@@ -131,4 +131,8 @@ export class FireserviceService {
   removeItemsfromCart(data){
     return this.firestore.collection('carts').doc(data.cartId).collection('items').doc(data.itemId).delete();
   }
+
+  deleteCart(cartId){
+    return this.firestore.collection('carts').doc(cartId).delete();
+  }
 }
