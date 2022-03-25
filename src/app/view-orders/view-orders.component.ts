@@ -28,7 +28,7 @@ export class ViewOrdersComponent implements OnInit {
               this.fireService.getKitchen(order.kitchenId).subscribe(doc => {
                 let kitchen: any = doc.data();
                 kitchenName = kitchen.cookName;
-                this.orders.push({kitchenName, status: order.status, total: order.total, kitchenImageURL: kitchen.imageURL})
+                this.orders.push({kitchenName, status: order.status, totalPrice: order.totalPrice, kitchenImageURL: kitchen.imageURL})
               })
             })
           }

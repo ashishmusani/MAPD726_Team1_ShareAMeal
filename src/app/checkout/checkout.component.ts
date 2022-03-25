@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FireserviceService } from 'src/services/fireservice.service';
+import { ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkout',
@@ -16,8 +18,8 @@ export class CheckoutComponent implements OnInit {
   public deliveryAddress: string;
   public deliveryApartmentNumber: string
 
-  constructor(private activatedRoute: ActivatedRoute,
-    private fireService: FireserviceService) { }
+  constructor(private activatedRoute: ActivatedRoute, private fireService: FireserviceService,
+    public toastController: ToastController, public router: Router) { }
 
     ngOnInit() {
     let userId = this.activatedRoute.snapshot.paramMap.get('userId');
@@ -71,6 +73,16 @@ export class CheckoutComponent implements OnInit {
       }
   this.fireService.createOrder(orderData);
 
+  this.presentToast()
+  this.router.navigate(['/customer/kitchens'])
   //Re-route to somewhere else after this.
+  }
+
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Order placed successfully!',
+      duration: 2000
+    });
+    toast.present();
   }
 }
