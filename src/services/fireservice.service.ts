@@ -135,4 +135,10 @@ export class FireserviceService {
   deleteCart(cartId){
     return this.firestore.collection('carts').doc(cartId).delete();
   }
+
+  getOrdersForCook(kitchenId){
+    if(kitchenId){
+      return this.firestore.collection("orders", ref => ref.where("kitchenId", "==", kitchenId)).get();
+    }
+  }
 }

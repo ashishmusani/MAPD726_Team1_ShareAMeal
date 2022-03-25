@@ -1,9 +1,15 @@
 <ion-content class="ion-justify-content-center" [fullscreen]="true">
   <ion-grid>
-    <ion-row class="ion-justify-content-center"  style="margin-top: 20vh;">
-      <ion-icon name="pizza-outline" size="large"></ion-icon>
+    <ion-row class="ion-justify-content-center"  style="margin-top: 10vh;">
+      <img src="../../assets/logo.png" class="logoImage">
     </ion-row>
-    <ion-row class="ion-justify-content-center ion-padding-vertical" style="margin-top: 15vh;">
+    <ion-row class="ion-justify-content-center ion-padding-vertical" style="margin-top: 5vh;">
+      <ion-item>
+        <ion-label position="floating">Name</ion-label>
+        <ion-input [(ngModel)]="name"></ion-input>
+      </ion-item>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-padding-vertical">
       <ion-item>
         <ion-label position="floating">Email</ion-label>
         <ion-input [(ngModel)]="email"></ion-input>

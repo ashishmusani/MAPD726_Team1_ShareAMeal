@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
         this.fireService.getDetails({uid: res.user.uid}).subscribe(data => {
           if(data.exists){
             let currentUser = data.data();
-            console.log(currentUser)
+            this.storageService.set('userType', currentUser['userType']);
             if(currentUser['userType'] === 'cook')
               this.router.navigate(['/cook'])
             else if (currentUser['userType'] === 'customer')

@@ -13,6 +13,7 @@ export class SignupComponent implements OnInit {
   public email: String;
   public password: String;
   public userType: String;
+  public name: String;
 
   constructor(private router: Router, public fireService: FireserviceService, public toastController: ToastController) {
 
@@ -25,13 +26,14 @@ export class SignupComponent implements OnInit {
   }
 
   signup(){
-    this.fireService.signup({email: this.email, password: this.password, userType: this.userType}).then(res => {
+    this.fireService.signup({email: this.email, password: this.password, userType: this.userType, name: this.name}).then(res => {
       if(res.user.uid){
         let data = {
           email: this.email,
           password: this.password,
           userType: this.userType,
-          uid: res.user.uid
+          uid: res.user.uid,
+          name: this.name
         }
         this.fireService.saveDetails(data).then(res => {
           this.router.navigate(['/login']);

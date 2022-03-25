@@ -11,6 +11,7 @@ import {StorageService} from 'src/services/storage-service.service';
 export class ViewOrdersComponent implements OnInit {
 
   private orders = []
+  private userType = ''
 
   constructor(public router: Router, public fireService: FireserviceService, public storageService: StorageService) { }
 
@@ -20,23 +21,51 @@ export class ViewOrdersComponent implements OnInit {
   ionViewWillEnter(){
     this.orders = []
     let ordersDocs = []
-    this.storageService.get('userId').then(uid => {
-      if(uid){
-        this.fireService.getOrdersForCustomer(uid).subscribe(querySnapshot => {
-          if(querySnapshot.size>0){
-            querySnapshot.forEach(doc => {
-              ordersDocs.push(doc.data());
-            })
-            ordersDocs.forEach(order => {
-              let kitchenName;
-              this.fireService.getKitchen(order.kitchenId).subscribe(doc => {
-                let kitchen: any = doc.data();
-                kitchenName = kitchen.cookName;
-                this.orders.push({kitchenName, status: order.status, totalPrice: order.totalPrice, kitchenImageURL: kitchen.imageURL})
-              })
+    this.storageService.get('userType').then( uType => {
+      this.userType = uType
+      if(uType === 'customer'){
+        console.log("customer")
+        this.storageService.get('userId').then(uid => {
+          if(uid){
+            this.fireService.getOrdersForCustomer(uid).subscribe(querySnapshot => {
+              if(querySnapshot.size>0){
+                querySnapshot.forEach(doc => {
+                  ordersDocs.push(doc.data());
+                })
+                ordersDocs.forEach(order => {
+                  let kitchenName;
+                  this.fireService.getKitchen(order.kitchenId).subscribe(doc => {
+                    let kitchen: any = doc.data();
+                    kitchenName = kitchen.cookName;
+                    this.orders.push({kitchenName, status: order.status, totalPrice: order.totalPrice, kitchenImageURL: kitchen.imageURL})
+                  })
+                })
+              }
             })
           }
         })
+      } else if (uType === 'cook'){
+        this.storageService.get("kitchenId").then(kId => {
+          if(kId){
+            this.fireService.getOrdersForCook(kId).subscribe(querySnapshot => {
+              if(querySnapshot.size>0){
+                querySnapshot.forEach(doc => {
+                  ordersDocs.push(doc.data())
+                })
+                ordersDocs.forEach(order => {
+                  let customerName;
+                  this.fireService.getDetails({uid: order.customerId}).subscribe(doc => {
+                    let customer: any = doc.data()
+                    customerName = customer.name
+                    this.orders.push({customerName, status: order.status, totalPrice: order.totalPrice, deliveryType: order.deliveryType})
+                  })
+                })
+              }
+            })
+          }
+        })
+      } else {
+
       }
     })
   }
