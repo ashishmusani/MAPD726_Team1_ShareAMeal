@@ -15,6 +15,10 @@ export class ViewOrdersComponent implements OnInit {
   constructor(public router: Router, public fireService: FireserviceService, public storageService: StorageService) { }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter(){
+    this.orders = []
     let ordersDocs = []
     this.storageService.get('userId').then(uid => {
       if(uid){
@@ -35,7 +39,6 @@ export class ViewOrdersComponent implements OnInit {
         })
       }
     })
-    console.log(this.orders);
   }
 
 }
