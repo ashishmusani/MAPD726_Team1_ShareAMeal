@@ -25,7 +25,7 @@
 </ion-content>
 
 <ion-content *ngIf="this.userType === 'cook' || this.userType === 'deliveryAgent'">
-  <ion-card *ngFor="let order of this.orders">
+  <ion-card *ngFor="let order of this.orders" [routerLink]="['/','order-details', order.id]">
       <ion-card-header>
         <ion-card-title>{{order.customerName}}</ion-card-title>
         <ion-card-subtitle color="info">{{order.deliveryType}}</ion-card-subtitle>

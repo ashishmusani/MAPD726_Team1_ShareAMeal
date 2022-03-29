@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Order Details</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="this.order && this.order.items">
+  <ion-row class="ion-justify-content-center ion-padding-vertical">
+    <ion-label style="font-size: medium;">Order ID: {{this.orderId}}</ion-label>
+  </ion-row>
+  <ion-row class="ion-justify-content-center ion-padding-vertical">
+    <ion-label style="font-size: medium;">Status: {{this.order.status}}</ion-label>
+  </ion-row>
+  <ion-row class="ion-justify-content-center">
+    <ion-label style="font-size: medium;">ITEMS</ion-label>
+  </ion-row>
+  <ion-card *ngFor="let item of this.order.items">
+    <ion-item>
+      <ion-card-header>
+        <ion-card-title>{{item.itemname}} x {{item.qty}}</ion-card-title>
+        
+        <ion-card-subtitle class="ion-padding-vertical">
+          <ion-label position="fixed" style="font-size: medium;">Price: ${{item.price}}</ion-label>
+        </ion-card-subtitle>
+      </ion-card-header>
+    </ion-item>
+  </ion-card>
+ 
+  <ion-row *ngIf="this.order.status !== 'Ready'" class="ion-justify-content-center" style="margin-top: 2vh;">
+    <ion-button expand="block" size="large" color="medium" (click)="changeOrderStatus()">{{this.nextPossibleStatus}}</ion-button>
+  </ion-row>
+
+  <ion-row *ngIf="this.order.status === 'Ready'" class="ion-justify-content-center" style="margin-top: 2vh;">
+    Order ready to be picked up
+  </ion-row>
+
+</ion-content>

@@ -22,6 +22,7 @@ import { ItemDetailsComponent } from './item-details/item-details.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ViewOrdersComponent } from './view-orders/view-orders.component';
 import { UpdateItemComponent } from './update-item/update-item.component';
+import { OrderDetailsComponent } from './order-details/order-details.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { UpdateItemComponent } from './update-item/update-item.component';
     ItemDetailsComponent,
     CheckoutComponent,
     ViewOrdersComponent,
-    UpdateItemComponent
+    UpdateItemComponent,
+    OrderDetailsComponent
   ],
   entryComponents: [
     LoginComponent

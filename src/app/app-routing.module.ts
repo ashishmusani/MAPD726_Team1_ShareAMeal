@@ -5,6 +5,7 @@ import { SignupComponent } from './signup/signup.component';
 import { ItemDetailsComponent } from './item-details/item-details.component'
 import { CheckoutComponent } from './checkout/checkout.component'
 import { UpdateItemComponent } from './update-item/update-item.component';
+import { OrderDetailsComponent } from './order-details/order-details.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -38,6 +39,11 @@ const routes: Routes = [
     path: 'update-item/:kitchenId/:itemId',
     component: UpdateItemComponent
   },
+  {
+    path: 'order-details/:orderId',
+    component: OrderDetailsComponent
+  },
+
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
     path: 'deliveryagent',

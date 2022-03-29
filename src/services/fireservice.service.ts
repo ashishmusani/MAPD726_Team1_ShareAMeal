@@ -145,4 +145,12 @@ export class FireserviceService {
   getOrdersForDeliveryAgent(){
     return this.firestore.collection("orders", ref => ref.where("deliveryType", "!=", "Pickup")).get();
   }
+
+  getOrder(orderId){
+    return this.firestore.collection("orders").doc(orderId).get();
+  }
+
+  updateOrderStatus(orderId, newStatus){
+    return this.firestore.collection("orders").doc(orderId).update({status: newStatus});
+  }
 }
