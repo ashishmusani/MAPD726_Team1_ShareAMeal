@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FireserviceService } from 'src/services/fireservice.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order-details',
@@ -11,7 +12,7 @@ export class OrderDetailsComponent implements OnInit {
 
   private order: any;
   private orderId: String;
-  constructor(private activatedRoute: ActivatedRoute, public fireService: FireserviceService) { }
+  constructor(private activatedRoute: ActivatedRoute, public fireService: FireserviceService, public router: Router) { }
   private nextPossibleStatus: String;
 
   ngOnInit(){}
@@ -28,7 +29,9 @@ export class OrderDetailsComponent implements OnInit {
 
   changeOrderStatus(){
     console.log('here')
-    this.fireService.updateOrderStatus(this.orderId, this.getNextPossibleStatus(this.order.status))
+    this.fireService.updateOrderStatus(this.orderId, this.getNextPossibleStatus(this.order.status)).then(res => {
+      this.router.navigate(['/cook'])
+    })
   }
 
   getNextPossibleStatus(currentStatus: String){

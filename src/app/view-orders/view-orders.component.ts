@@ -12,6 +12,7 @@ export class ViewOrdersComponent implements OnInit {
 
   private orders = []
   private userType = ''
+  private allOrderItems = {}
 
   constructor(public router: Router, public fireService: FireserviceService, public storageService: StorageService) { }
 
@@ -21,6 +22,7 @@ export class ViewOrdersComponent implements OnInit {
   ionViewWillEnter(){
     this.orders = []
     let ordersDocs = []
+    this.allOrderItems = {}
     this.storageService.get('userType').then( uType => {
       this.userType = uType
       if(uType === 'customer'){
@@ -42,7 +44,6 @@ export class ViewOrdersComponent implements OnInit {
                 })
               }
             })
-            console.log(this.orders)
           }
         })
       } else if (uType === 'cook'){
@@ -59,8 +60,19 @@ export class ViewOrdersComponent implements OnInit {
                   this.fireService.getDetails({uid: order.customerId}).subscribe(doc => {
                     let customer: any = doc.data()
                     customerName = customer.name
-                    this.orders.push({customerName, status: order.status, totalPrice: order.totalPrice, deliveryType: order.deliveryType, id: order.id})
+                    this.orders.push({customerName, status: order.status, totalPrice: order.totalPrice, deliveryType: order.deliveryType, id: order.id, items: order.items})
                   })
+                  
+                  if(order.status === "Confirm" && order.items){
+                    order.items.forEach(itemInOrder => {
+                      if(this.allOrderItems[itemInOrder.itemname]){
+                        this.allOrderItems[itemInOrder.itemname] += parseInt(itemInOrder.qty)
+                      } else {
+                        this.allOrderItems[itemInOrder.itemname] = parseInt(itemInOrder.qty)
+                      }
+                    })
+                  }
+                  console.log(this.allOrderItems)
                 })
               }
             })
@@ -86,5 +98,7 @@ export class ViewOrdersComponent implements OnInit {
       }
     })
   }
-
+  objectKeysLength(obj) {
+    return (Object.keys(obj).length)  
+  }
 }

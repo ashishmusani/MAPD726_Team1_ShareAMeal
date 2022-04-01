@@ -25,6 +25,17 @@
 </ion-content>
 
 <ion-content *ngIf="this.userType === 'cook' || this.userType === 'deliveryAgent'">
+  <ion-card *ngIf="objectKeysLength(this.allOrderItems) > 0" class="orderConsolidateArea">
+    <ion-card-header>
+      <ion-card-subtitle>Total Quantities for confirmed orders</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item *ngFor="let item of this.allOrderItems | keyvalue">
+        <ion-label>{{item.key}}</ion-label>
+        <ion-label color="info" slot="end">{{item.value}}</ion-label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
   <ion-card *ngFor="let order of this.orders" [routerLink]="['/','order-details', order.id]">
       <ion-card-header>
         <ion-card-title>{{order.customerName}}</ion-card-title>
