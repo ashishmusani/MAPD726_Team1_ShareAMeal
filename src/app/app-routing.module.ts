@@ -40,7 +40,7 @@ const routes: Routes = [
     component: UpdateItemComponent
   },
   {
-    path: 'order-details/:orderId',
+    path: 'order-details/:orderId/:userType',
     component: OrderDetailsComponent
   },
 

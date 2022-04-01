@@ -12,6 +12,7 @@ export class OrderDetailsComponent implements OnInit {
 
   private order: any;
   private orderId: String;
+  private userType: String;
   constructor(private activatedRoute: ActivatedRoute, public fireService: FireserviceService, public router: Router) { }
   private nextPossibleStatus: String;
 
@@ -19,6 +20,7 @@ export class OrderDetailsComponent implements OnInit {
 
   ionViewWillEnter() {
     this.orderId = this.activatedRoute.snapshot.paramMap.get('orderId');
+    this.userType = this.activatedRoute.snapshot.paramMap.get('userType');
     if(this.orderId){
       this.fireService.getOrder(this.orderId).subscribe(doc => {
         this.order =  doc.data()

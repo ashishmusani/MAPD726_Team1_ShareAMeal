@@ -36,7 +36,7 @@
       </ion-item>
     </ion-card-content>
   </ion-card>
-  <ion-card *ngFor="let order of this.orders" [routerLink]="['/','order-details', order.id]">
+  <ion-card *ngFor="let order of this.orders" [routerLink]="['/','order-details', order.id, this.userType]">
       <ion-card-header>
         <ion-card-title>{{order.customerName}}</ion-card-title>
         <ion-card-subtitle color="info">{{order.deliveryType}}</ion-card-subtitle>

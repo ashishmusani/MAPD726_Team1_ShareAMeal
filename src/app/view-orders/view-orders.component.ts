@@ -83,18 +83,20 @@ export class ViewOrdersComponent implements OnInit {
         this.fireService.getOrdersForDeliveryAgent().subscribe(querySnapshot => {
           if(querySnapshot.size>0){
             querySnapshot.forEach(doc => {
-              ordersDocs.push(doc.data())
+              let o: any = doc.data();
+              ordersDocs.push({id: doc.id, ...o});
             })
             ordersDocs.forEach(order => {
               let customerName;
               this.fireService.getDetails({uid: order.customerId}).subscribe(doc => {
                 let customer: any = doc.data()
                 customerName = customer.name
-                this.orders.push({customerName, status: order.status, totalPrice: order.totalPrice, deliveryType: order.deliveryType})
+                this.orders.push({customerName, status: order.status, totalPrice: order.totalPrice, deliveryType: order.deliveryType, id: order.id})
               })
             })
           }
         })
+        console.log(this.orders)
       }
     })
   }

@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="this.order && this.order.items">
+<ion-content *ngIf="this.userType === 'cook' && this.order && this.order.items">
   <ion-row class="ion-justify-content-center ion-padding-vertical">
     <ion-label style="font-size: medium;">Order ID: {{this.orderId}}</ion-label>
   </ion-row>
@@ -37,4 +37,15 @@
     Order ready to be picked up
   </ion-row>
 
+</ion-content>
+
+<ion-content *ngIf="this.userType === 'deliveryAgent' && this.order && this.order.items">
+  <ion-row class="ion-justify-content-center ion-padding-vertical">
+    <ion-label style="font-size: medium;">Order ID: {{this.orderId}}</ion-label>
+  </ion-row>
+  <ion-row class="ion-justify-content-center ion-padding-vertical">
+    <ion-label style="font-size: medium;">Status: {{this.order.status}}</ion-label>
+  </ion-row>
+
+  <!-- Add extra UI and functions here for delivery agent -->
 </ion-content>
