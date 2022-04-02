@@ -44,8 +44,26 @@
     <ion-label style="font-size: medium;">Order ID: {{this.orderId}}</ion-label>
   </ion-row>
   <ion-row class="ion-justify-content-center ion-padding-vertical">
-    <ion-label style="font-size: medium;">Status: {{this.order.status}}</ion-label>
+    <ion-label style="font-size: medium; font-weight: bold; color: blue;">Status: {{this.order.status}}</ion-label>
   </ion-row>
 
   <!-- Add extra UI and functions here for delivery agent -->
+  <ion-row class="ion-justify-content-center ion-padding-vertical">
+    <ion-label style="font-size: medium; font-weight: bold; color: brown;">Pickup</ion-label>
+  </ion-row>
+  <ion-row class="ion-justify-content-center ion-padding-vertical">
+    <ion-label style="font-size: medium; font-weight: bold;">Address: {{this.pickupAddress}}</ion-label>
+  </ion-row>
+  <ion-row class="ion-justify-content-center ion-padding-vertical">
+    <ion-label style="font-size: medium; font-weight: bold;">Phone No: {{this.pickupPhoneNo}}</ion-label>
+  </ion-row>
+  <ion-row class="ion-justify-content-center ion-padding-vertical">
+    <ion-label style="font-size: medium; font-weight: bold; color: brown;">Dropoff</ion-label>
+  </ion-row>
+  <ion-row class="ion-justify-content-center ion-padding-vertical">
+    <ion-label style="font-size: medium; font-weight: bold;">Address: {{this.order.deliveryType}}</ion-label>
+  </ion-row>
+  <ion-row class="ion-justify-content-center ion-padding-vertical">
+    <ion-button style="font-size: medium; font-weight: bold;">Deliver</ion-button>
+  </ion-row>
 </ion-content>

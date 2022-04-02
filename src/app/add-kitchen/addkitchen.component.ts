@@ -18,6 +18,7 @@ export class AddkitchenComponent implements OnInit {
   public description: String;
   public cookName: String;
   public contactNo: String;
+  public address: String;
   public currentUserId: String;
   public cuisine: String;
   errorMessage = '';
@@ -42,6 +43,7 @@ export class AddkitchenComponent implements OnInit {
       description: this.description,
       cookName: this.cookName,
       contactNo: this.contactNo,
+      address: this.address,
       userId: this.currentUserId,
       cuisine: this.cuisine,
       imageURL: this.imageURL,

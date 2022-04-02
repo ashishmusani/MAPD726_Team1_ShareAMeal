@@ -13,6 +13,9 @@ export class OrderDetailsComponent implements OnInit {
   private order: any;
   private orderId: String;
   private userType: String;
+  private kitchen: any;
+  private pickupAddress: String = "";
+  private pickupPhoneNo: String = "";
   constructor(private activatedRoute: ActivatedRoute, public fireService: FireserviceService, public router: Router) { }
   private nextPossibleStatus: String;
 
@@ -25,6 +28,12 @@ export class OrderDetailsComponent implements OnInit {
       this.fireService.getOrder(this.orderId).subscribe(doc => {
         this.order =  doc.data()
         this.nextPossibleStatus = this.getNextPossibleStatus(this.order.status)
+        // get kitchen address and contact no.
+        this.fireService.getKitchen(this.order.kitchenId).subscribe(doc => {
+          this.kitchen = doc.data()
+          this.pickupAddress = this.kitchen.address
+          this.pickupPhoneNo = this.kitchen.contactNo
+        })
       })
     }
   }
