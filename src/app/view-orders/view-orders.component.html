@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content *ngIf="this.userType === 'customer'">
-  <ion-card *ngFor="let order of this.orders">
+  <ion-card *ngFor="let order of this.orders" [routerLink]="['/','order-details', order.id, this.userType]">
     <ion-item>
       <img src={{order.kitchenImageURL}} style="width: 5rem; height: 5rem">
       <ion-card-header>

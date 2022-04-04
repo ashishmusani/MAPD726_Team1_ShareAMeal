@@ -32,14 +32,15 @@ export class ViewOrdersComponent implements OnInit {
             this.fireService.getOrdersForCustomer(uid).subscribe(querySnapshot => {
               if(querySnapshot.size>0){
                 querySnapshot.forEach(doc => {
-                  ordersDocs.push(doc.data());
+                  let o: any = doc.data();
+                  ordersDocs.push({id: doc.id, ...o});
                 })
                 ordersDocs.forEach(order => {
                   let kitchenName;
                   this.fireService.getKitchen(order.kitchenId).subscribe(doc => {
                     let kitchen: any = doc.data();
                     kitchenName = kitchen.kitchenName;
-                    this.orders.push({kitchenName, status: order.status, totalPrice: order.totalPrice, kitchenImageURL: kitchen.imageURL})
+                    this.orders.push({kitchenName, status: order.status, totalPrice: order.totalPrice, kitchenImageURL: kitchen.imageURL, id: order.id})
                   })
                 })
               }
@@ -84,7 +85,8 @@ export class ViewOrdersComponent implements OnInit {
           if(querySnapshot.size>0){
             querySnapshot.forEach(doc => {
               let o: any = doc.data();
-              ordersDocs.push({id: doc.id, ...o});
+              if(o.status !== "Cancelled")
+                ordersDocs.push({id: doc.id, ...o});
             })
             ordersDocs.forEach(order => {
               let customerName;

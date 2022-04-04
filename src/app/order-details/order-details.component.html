@@ -29,7 +29,7 @@
     </ion-item>
   </ion-card>
  
-  <ion-row *ngIf="this.order.status !== 'Ready'" class="ion-justify-content-center" style="margin-top: 2vh;">
+  <ion-row *ngIf="this.order.status !== 'Ready' && this.order.status !== 'Cancelled'" class="ion-justify-content-center" style="margin-top: 2vh;">
     <ion-button expand="block" size="large" color="medium" (click)="changeOrderStatus()">{{this.nextPossibleStatus}}</ion-button>
   </ion-row>
 
@@ -65,5 +65,36 @@
   </ion-row>
   <ion-row class="ion-justify-content-center ion-padding-vertical">
     <ion-button style="font-size: medium; font-weight: bold;">Deliver</ion-button>
+  </ion-row>
+</ion-content>
+
+<ion-content *ngIf="this.userType === 'customer' && this.order && this.order.items">
+  <ion-row class="ion-justify-content-center ion-padding-vertical">
+    <ion-label style="font-size: medium;">Order ID: {{this.orderId}}</ion-label>
+  </ion-row>
+  <ion-row class="ion-justify-content-center ion-padding-vertical">
+    <ion-label style="font-size: medium;">Status: {{this.order.status}}</ion-label>
+  </ion-row>
+  <ion-row class="ion-justify-content-center">
+    <ion-label style="font-size: medium;">ITEMS</ion-label>
+  </ion-row>
+  <ion-card *ngFor="let item of this.order.items">
+    <ion-item>
+      <ion-card-header>
+        <ion-card-title>{{item.itemname}} x {{item.qty}}</ion-card-title>
+        
+        <ion-card-subtitle class="ion-padding-vertical">
+          <ion-label position="fixed" style="font-size: medium;">Price: ${{item.price}}</ion-label>
+        </ion-card-subtitle>
+      </ion-card-header>
+    </ion-item>
+  </ion-card>
+ 
+  <ion-row *ngIf="this.order.status === 'Open' || this.order.status === 'Confirm'" class="ion-justify-content-center" style="margin-top: 2vh;">
+    <ion-button expand="block" size="large" color="medium" (click)="cancelOrder()">CANCEL</ion-button>
+  </ion-row>
+
+  <ion-row *ngIf="this.order.status === 'Ready' || this.order.status === 'Preparing'" class="ion-justify-content-center" style="margin-top: 2vh;">
+    Order already being Prepared
   </ion-row>
 </ion-content>

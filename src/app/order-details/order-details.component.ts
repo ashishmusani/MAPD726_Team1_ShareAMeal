@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FireserviceService } from 'src/services/fireservice.service';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-order-details',
@@ -16,7 +17,7 @@ export class OrderDetailsComponent implements OnInit {
   private kitchen: any;
   private pickupAddress: String = "";
   private pickupPhoneNo: String = "";
-  constructor(private activatedRoute: ActivatedRoute, public fireService: FireserviceService, public router: Router) { }
+  constructor(private activatedRoute: ActivatedRoute, public fireService: FireserviceService, public router: Router, public toastController: ToastController) { }
   private nextPossibleStatus: String;
 
   ngOnInit(){}
@@ -45,6 +46,16 @@ export class OrderDetailsComponent implements OnInit {
     })
   }
 
+  cancelOrder(){
+    console.log('cancelling Done')
+    this.fireService.updateOrderStatus(this.orderId, "Cancelled").then(res => {
+      this.presentToast("Order Cancelled successfully!")
+      this.router.navigate(['/customer'])
+    }, err => {
+      this.presentToast("Order could not be cancelled!")
+    })
+  }
+
   getNextPossibleStatus(currentStatus: String){
     switch(currentStatus){
       case 'Open':
@@ -61,6 +72,13 @@ export class OrderDetailsComponent implements OnInit {
       
     }
   }
-  
+
+  async presentToast(msg) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
+  }
 
 }
