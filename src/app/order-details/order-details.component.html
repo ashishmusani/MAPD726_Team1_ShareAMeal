@@ -64,7 +64,7 @@
     <ion-label style="font-size: medium; font-weight: bold;">Address: {{this.order.deliveryType}}</ion-label>
   </ion-row>
   <ion-row class="ion-justify-content-center ion-padding-vertical">
-    <ion-button style="font-size: medium; font-weight: bold;">Deliver</ion-button>
+    <ion-button (click)="deliverOrder(this.orderId)" style="font-size: medium; font-weight: bold;">Deliver</ion-button>
   </ion-row>
 </ion-content>
 
