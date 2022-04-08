@@ -10,9 +10,10 @@ import {StorageService} from 'src/services/storage-service.service';
 })
 export class ViewOrdersComponent implements OnInit {
 
-  private orders = []
-  private userType = ''
-  private allOrderItems = {}
+  private orders = [];
+  private userType = '';
+  private allOrderItems = {};
+  private currentDeliveryAgentId = '';
 
   constructor(public router: Router, public fireService: FireserviceService, public storageService: StorageService) { }
 
@@ -23,7 +24,7 @@ export class ViewOrdersComponent implements OnInit {
     this.orders = []
     let ordersDocs = []
     this.allOrderItems = {}
-    this.storageService.get('userType').then( uType => {
+    this.storageService.get('userType').then(uType => {
       this.userType = uType
       if(uType === 'customer'){
         console.log("customer")
@@ -81,6 +82,9 @@ export class ViewOrdersComponent implements OnInit {
         })
       } else {
         // delivery agent
+        this.storageService.get('userId').then(res => {
+          this.currentDeliveryAgentId = res;
+        })
         this.fireService.getOrdersForDeliveryAgent().subscribe(querySnapshot => {
           if(querySnapshot.size>0){
             querySnapshot.forEach(doc => {
@@ -93,16 +97,23 @@ export class ViewOrdersComponent implements OnInit {
               this.fireService.getDetails({uid: order.customerId}).subscribe(doc => {
                 let customer: any = doc.data()
                 customerName = customer.name
-                this.orders.push({customerName, status: order.status, totalPrice: order.totalPrice, deliveryType: order.deliveryType, id: order.id})
+                this.orders.push({customerName, ...order})
               })
             })
           }
         })
         console.log(this.orders)
+
       }
     })
   }
   objectKeysLength(obj) {
     return (Object.keys(obj).length)  
   }
+
+  deliverOrder(order){
+    this.fireService.updateDeliveryAgentOrder(order.id, this.currentDeliveryAgentId);
+  }
+
+  
 }

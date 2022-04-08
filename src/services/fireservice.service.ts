@@ -153,4 +153,9 @@ export class FireserviceService {
   updateOrderStatus(orderId, newStatus){
     return this.firestore.collection("orders").doc(orderId).update({status: newStatus});
   }
+
+  updateDeliveryAgentOrder(orderId, deliveryAgentId){
+    return this.firestore.collection("orders").doc(orderId).update({deliveryAgentId: deliveryAgentId, orderAssigned: true})
+  }
+
 }

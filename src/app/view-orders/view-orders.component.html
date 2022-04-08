@@ -36,7 +36,7 @@
       </ion-item>
     </ion-card-content>
   </ion-card>
-  <ion-card *ngFor="let order of this.orders" [routerLink]="['/','order-details', order.id, this.userType]">
+  <ion-card *ngFor="let order of this.orders">
       <ion-card-header>
         <ion-card-title>{{order.customerName}}</ion-card-title>
         <ion-card-subtitle color="info">{{order.deliveryType}}</ion-card-subtitle>
@@ -45,6 +45,18 @@
       <ion-card-content>
         <ion-label color="success">
           Status: {{order.status}}
+        </ion-label>
+      </ion-card-content>
+      <ion-button (click)="deliverOrder(order)" *ngIf="this.userType != 'cook' && order.status != 'Open' && !order.orderAssigned">
+        Deliver {{!order.orderAssigned}}
+      </ion-button>
+      <ion-button [routerLink]="['/','order-details', order.id, this.userType]">
+        View
+      </ion-button>
+
+      <ion-card-content *ngIf="this.userType != 'cook' && order.deliveryAgentId === this.currentDeliveryAgentId && order.orderAssigned">
+        <ion-label color="success">
+          You are requried to deliver this order!
         </ion-label>
       </ion-card-content>
   </ion-card>
