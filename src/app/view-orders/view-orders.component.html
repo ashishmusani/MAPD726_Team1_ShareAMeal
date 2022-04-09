@@ -25,6 +25,14 @@
 </ion-content>
 
 <ion-content *ngIf="this.userType === 'cook' || this.userType === 'deliveryAgent'">
+  <ion-refresher slot="fixed" (ionRefresh)="loadOrders($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Pull to refresh"
+      refreshingSpinner="lines"
+      refreshingText="Reloading orders">
+    </ion-refresher-content>
+  </ion-refresher>
   <ion-card *ngIf="objectKeysLength(this.allOrderItems) > 0" class="orderConsolidateArea">
     <ion-card-header>
       <ion-card-subtitle>Total Quantities for confirmed orders</ion-card-subtitle>
@@ -55,7 +63,7 @@
       </ion-button>
 
       <ion-card-content *ngIf="this.userType != 'cook' && order.deliveryAgentId === this.currentDeliveryAgentId && order.orderAssigned">
-        <ion-label color="success">
+        <ion-label *ngIf="order.status == 'Ready' || order.status == 'ready' || order.status == 'Picked up'" color="danger">
           You are requried to deliver this order!
         </ion-label>
       </ion-card-content>

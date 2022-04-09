@@ -115,5 +115,9 @@ export class ViewOrdersComponent implements OnInit {
     this.fireService.updateDeliveryAgentOrder(order.id, this.currentDeliveryAgentId);
   }
 
-  
+  loadOrders(event){
+    this.ionViewWillEnter()
+    event.target.complete();
+    
+  }
 }

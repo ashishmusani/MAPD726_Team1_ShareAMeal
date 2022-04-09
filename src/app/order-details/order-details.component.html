@@ -63,8 +63,11 @@
   <ion-row class="ion-justify-content-center ion-padding-vertical">
     <ion-label style="font-size: medium; font-weight: bold;">Address: {{this.order.deliveryType}}</ion-label>
   </ion-row>
-  <ion-row class="ion-justify-content-center ion-padding-vertical">
-    <ion-button (click)="deliverOrder(this.orderId)" style="font-size: medium; font-weight: bold;">Deliver</ion-button>
+  <ion-row *ngIf="this.order.status == 'Ready'" class="ion-justify-content-center ion-padding-vertical">
+    <ion-button (click)="deliverOrder(this.orderId, 'Picked up')" style="font-size: medium; font-weight: bold;">Update Picked up Status</ion-button>
+  </ion-row>
+  <ion-row *ngIf="this.order.status == 'Picked up'" class="ion-justify-content-center ion-padding-vertical">
+    <ion-button (click)="deliverOrder(this.orderId, 'Delivered')" style="font-size: medium; font-weight: bold;">Update Delivered Status</ion-button>
   </ion-row>
 </ion-content>
 

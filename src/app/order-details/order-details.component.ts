@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FireserviceService } from 'src/services/fireservice.service';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { AlertService } from 'src/services/alert-service.service';
 
 @Component({
   selector: 'app-order-details',
@@ -17,7 +18,8 @@ export class OrderDetailsComponent implements OnInit {
   private kitchen: any;
   private pickupAddress: String = "";
   private pickupPhoneNo: String = "";
-  constructor(private activatedRoute: ActivatedRoute, public fireService: FireserviceService, public router: Router, public toastController: ToastController) { }
+  constructor(private activatedRoute: ActivatedRoute, public fireService: FireserviceService, 
+    public router: Router, public toastController: ToastController, private alertService: AlertService) { }
   private nextPossibleStatus: String;
 
   ngOnInit(){}
@@ -71,6 +73,14 @@ export class OrderDetailsComponent implements OnInit {
         break;
       
     }
+  }
+
+  deliverOrder(orderId, newStatus) {
+    this.fireService.updateOrderStatus(this.orderId, newStatus).then(res => {
+      // alert message
+      this.alertService.genericAlert("Information", "You have updated status of order successfully!")
+      this.router.navigate(['/deliveryagent/orders'])
+    })
   }
 
   async presentToast(msg) {
