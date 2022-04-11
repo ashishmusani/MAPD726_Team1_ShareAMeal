@@ -18,6 +18,7 @@ export class OrderDetailsComponent implements OnInit {
   private kitchen: any;
   private pickupAddress: String = "";
   private pickupPhoneNo: String = "";
+  private dropoffPhoneNo: String ="";
   constructor(private activatedRoute: ActivatedRoute, public fireService: FireserviceService, 
     public router: Router, public toastController: ToastController, private alertService: AlertService) { }
   private nextPossibleStatus: String;

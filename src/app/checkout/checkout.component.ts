@@ -17,7 +17,8 @@ export class CheckoutComponent implements OnInit {
 
   public deliveryOptionToggle : boolean = false;
   public deliveryAddress: string;
-  public deliveryApartmentNumber: string
+  public deliveryApartmentNumber: string;
+  public deliveryContact: string
 
   constructor(private activatedRoute: ActivatedRoute, private fireService: FireserviceService,
     public toastController: ToastController, public router: Router, private storageService: StorageService) { }
@@ -71,6 +72,7 @@ export class CheckoutComponent implements OnInit {
         items: newItem,
         totalPrice: this.totalprice,
         deliveryType: this.deliveryOptionToggle == false ? "Pickup" : `${this.deliveryApartmentNumber}, ${this.deliveryAddress}`,
+        deliveryContact: this.deliveryOptionToggle == false ? "Pickup" : `${this.deliveryContact}`,
         status: 'Open'
       }
     this.fireService.createOrder(orderData).then(res => {

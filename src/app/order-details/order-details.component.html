@@ -55,13 +55,16 @@
     <ion-label style="font-size: medium; font-weight: bold;">Address: {{this.pickupAddress}}</ion-label>
   </ion-row>
   <ion-row class="ion-justify-content-center ion-padding-vertical">
-    <ion-label style="font-size: medium; font-weight: bold;">Phone No: {{this.pickupPhoneNo}}</ion-label>
+    <ion-label style="font-size: medium; font-weight: bold;">Cook Phone No: {{this.pickupPhoneNo}}</ion-label>
   </ion-row>
   <ion-row class="ion-justify-content-center ion-padding-vertical">
     <ion-label style="font-size: medium; font-weight: bold; color: brown;">Dropoff</ion-label>
   </ion-row>
   <ion-row class="ion-justify-content-center ion-padding-vertical">
     <ion-label style="font-size: medium; font-weight: bold;">Address: {{this.order.deliveryType}}</ion-label>
+  </ion-row>
+  <ion-row class="ion-justify-content-center ion-padding-vertical">
+    <ion-label style="font-size: medium; font-weight: bold;">Customer Phone No: {{this.order.deliveryContact}}</ion-label>
   </ion-row>
   <ion-row *ngIf="this.order.status == 'Ready'" class="ion-justify-content-center ion-padding-vertical">
     <ion-button (click)="deliverOrder(this.orderId, 'Picked up')" style="font-size: medium; font-weight: bold;">Update Picked up Status</ion-button>
